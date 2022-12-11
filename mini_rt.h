@@ -5,6 +5,7 @@
 # include <unistd.h>
 # include <mlx.h>
 # include <math.h>
+# include <stdio.h>
 // # include "libft.h"
 # include "key.h"
 

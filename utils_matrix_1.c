@@ -1,6 +1,17 @@
 #include "mini_rt.h"
 
-t_point    matrix_add(t_point a, t_point b)
+t_point     create_vector(double x, double y, double z)
+{
+    t_point result;
+
+    result.x = x;
+    result.y = y;
+    result.z = z;
+
+    return (result);
+}
+
+t_point    vector_add(t_point a, t_point b)
 {
     t_point result;
 
@@ -11,7 +22,7 @@ t_point    matrix_add(t_point a, t_point b)
     return (result);
 }
 
-t_point    matrix_subtract(t_point a, t_point b)
+t_point    vector_subtract(t_point a, t_point b)
 {
     t_point result;
 
@@ -22,7 +33,7 @@ t_point    matrix_subtract(t_point a, t_point b)
     return (result);
 }
 
-t_point    matrix_multiply(t_point a, double multiplier)
+t_point    vector_multiply(t_point a, double multiplier)
 {
     t_point result;
 
@@ -33,9 +44,9 @@ t_point    matrix_multiply(t_point a, double multiplier)
     return (result);
 }
 
-t_point    matrix_divide(t_point a, double divisor)
+t_point    vector_divide(t_point a, double divisor)
 {   
-    return (matrix_multiply(a, (1 / divisor)));
+    return (vector_multiply(a, (1 / divisor)));
 }
 
 // int main() {
@@ -54,10 +65,10 @@ t_point    matrix_divide(t_point a, double divisor)
 //     p2.y = 5;
 //     p2.z = 5;
 
-//     plus = matrix_add(p1, p2);
-//     minus = matrix_subtract(p1, p2);
-//     multiply = matrix_multiply(p1, 10);
-//     divider = matrix_divide(p1, 10);
+//     plus = vector_add(p1, p2);
+//     minus = vector_subtract(p1, p2);
+//     multiply = vector_multiply(p1, 10);
+//     divider = vector_divide(p1, 10);
 //     printf("%f %f %f \n", plus.x, plus.y, plus.z);
 //     printf("%f %f %f \n", minus.x, minus.y, minus.z);
 //     printf("%f %f %f \n", multiply.x, multiply.y, multiply.z);

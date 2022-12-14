@@ -7,6 +7,7 @@
 # include <sys/stat.h>
 # include <fcntl.h>
 # include <math.h>
+# include <float.h>
 # include <mlx.h>
 # include "libft.h"
 # include "key.h"
@@ -49,7 +50,7 @@ typedef struct s_object {
 	t_color			color;  // for all objects except camera
 	t_point			norm;   // (normalized) for camera, plane and cylinder
 	double			ratio;  // for ambient and light
-	double			view;   // for camera
+	double			fov;   	// for camera
 	double			diam;   // (diameter) for sphere and cylinder
 	double			height; // for cylinder
 	struct s_object	*next;

@@ -74,7 +74,7 @@ void	print_obj(t_object *obj)
 	printf("color  %d,%d,%d\n", obj->color.r, obj->color.g, obj->color.b);
 	printf("norm   %f,%f,%f\n", obj->norm.x, obj->norm.y, obj->norm.z);
 	printf("ratio  %f\n", obj->ratio);
-	printf("view   %f\n", obj->view);
+	printf("fov    %f\n", obj->fov);
 	printf("diam   %f\n", obj->diam);
 	printf("height %f\n", obj->height);
 }

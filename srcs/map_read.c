@@ -75,9 +75,9 @@ void	map_read(t_main *data, char *path)
 	}
 }
 
-int main(void) {
-	t_main	data;
+// int main(void) {
+// 	t_main	data;
 
-	map_read(&data, "minimalist.rt");
-	map_clear(&data);
-}
+// 	map_read(&data, "minimalist.rt");
+// 	map_clear(&data);
+// }

@@ -26,15 +26,13 @@ char	*get_next_line(int fd)
 	{
 		rd = read(fd, &character, 1);
 		if (rd <= 0)
-			break ;
+		{
+			free(buffer);
+			return (0);
+		}
 		buffer[i++] = character;
 		if (character == '\n')
 			break ;
-	}
-	if ((!buffer[i - 1] && !rd) || rd == -1)
-	{
-		free(buffer);
-		return (0);
 	}
 	buffer[i] = 0;
 	return (buffer);

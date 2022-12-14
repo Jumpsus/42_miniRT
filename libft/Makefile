@@ -17,7 +17,7 @@ SRC_FILE = ft_isalpha ft_isdigit ft_isalnum ft_isascii ft_isprint ft_strlen \
 	ft_tolower ft_strchr ft_strrchr ft_strncmp ft_memchr ft_memcmp ft_strnstr \
 	ft_atoi ft_calloc ft_strdup ft_substr ft_strjoin ft_split ft_strtrim \
 	ft_itoa ft_strmapi ft_striteri ft_putchar_fd ft_putstr_fd ft_putendl_fd \
-	ft_putnbr_fd utils_str utils_2d utils_2d_2 get_next_line
+	ft_putnbr_fd utils_str utils_2d utils_2d_2 ft_atof get_next_line
 
 SRC_DIR = srcs/
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILE)))

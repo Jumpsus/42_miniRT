@@ -35,4 +35,6 @@ char	**rm_from_2d(char ***old_arr, int idx);
 /* get_next_line */
 char	*get_next_line(int fd);
 
+double	ft_atof(const char *nptr);
+
 #endif

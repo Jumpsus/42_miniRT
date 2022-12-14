@@ -2,6 +2,7 @@
 # define KEY_H
 
 # ifdef __linux__
+
 #  define K_ESC			65307
 #  define K_UP			65362
 #  define K_LEFT		65361
@@ -13,6 +14,7 @@
 #  define K_D			100
 
 # else
+
 #  define K_ESC			53
 #  define K_UP			126
 #  define K_LEFT		123

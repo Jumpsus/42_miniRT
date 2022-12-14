@@ -12,6 +12,9 @@
 # include "libft.h"
 # include "key.h"
 
+# define WINDOW_WIDTH	600
+# define WINDOW_HEIGHT	300
+
 # define AMBIENT	1
 # define CAMERA		2
 # define LIGHT		3
@@ -65,6 +68,10 @@ typedef struct s_main {
 	t_object	light;
 	t_object	*obj;
 }	t_main;
+
+void	rt_init(t_main *data, char *path);
+int		rt_clear(t_main *data);
+int		rt_key(int key, t_main *data);
 
 t_point     create_vector(double x, double y, double z);
 t_point		vector_add(t_point a, t_point b);

@@ -74,7 +74,10 @@ int		rt_clear(t_main *data);
 int		rt_key(int key, t_main *data);
 int		rt_render(t_main *data);
 
+void	render_sphere(t_main *data);
+
 void	img_pix_put(t_img *img, int x, int y, t_color color);
+
 
 t_point     create_vector(double x, double y, double z);
 t_point		vector_add(t_point a, t_point b);

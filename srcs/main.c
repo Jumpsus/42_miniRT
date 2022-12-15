@@ -2,16 +2,24 @@
 
 void	rt_init(t_main *data, char *path)
 {
+	data->obj = 0;
+	map_set_defalt(&data->ambient);
+	map_set_defalt(&data->camera);
+	map_set_defalt(&data->light);
+	map_read(data, path);
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr,
 		WINDOW_WIDTH, WINDOW_HEIGHT, "miniRT");
-	map_read(data, path);
+	data->img.img_ptr = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
+	data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
+		&data->img.line, &data->img.endian);
 }
 
 #ifdef __linux__
 
 int	rt_clear(t_main *data)
 {
+	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
@@ -23,6 +31,7 @@ int	rt_clear(t_main *data)
 
 int	rt_clear(t_main *data)
 {
+	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	free(data->mlx_ptr);
 	map_clear(data);
@@ -41,6 +50,15 @@ int	rt_key(int key, t_main *data)
 	return (EXIT_SUCCESS);
 }
 
+int	rt_render(t_main *data)
+{
+	if (!data->win_ptr)
+		return (1);
+	//render_background(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img_ptr, 0, 0);
+	return (0);
+}
+
 int	main(int argc, char **argv)
 {
 	t_main	data;
@@ -54,6 +72,6 @@ int	main(int argc, char **argv)
 
 	mlx_hook(data.win_ptr, 17, 1L << 17, &rt_clear, &data);
 	mlx_hook(data.win_ptr, 2, 1L << 0, &rt_key, &data);
-	//mlx_loop_hook(data.mlx_ptr, &render, &data);
+	mlx_loop_hook(data.mlx_ptr, &rt_render, &data);
 	mlx_loop(data.mlx_ptr);
 }

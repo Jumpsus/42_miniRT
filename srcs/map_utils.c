@@ -71,7 +71,7 @@ void	print_obj(t_object *obj)
 {
 	printf("id	   %d\n", obj->id);
 	printf("pos	   %f,%f,%f\n", obj->pos.x, obj->pos.y, obj->pos.z);
-	printf("color  %d,%d,%d\n", obj->color.r, obj->color.g, obj->color.b);
+	printf("color  %f,%f,%f\n", obj->color.r, obj->color.g, obj->color.b);
 	printf("norm   %f,%f,%f\n", obj->norm.x, obj->norm.y, obj->norm.z);
 	printf("ratio  %f\n", obj->ratio);
 	printf("fov    %f\n", obj->fov);

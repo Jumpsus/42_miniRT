@@ -23,9 +23,9 @@
 # define CYLINDER	6
 
 typedef struct s_color {
-	unsigned int	r;
-	unsigned int	g;
-	unsigned int	b;
+	double	r;
+	double	g;
+	double	b;
 }	t_color;
 
 typedef struct s_point {
@@ -72,6 +72,9 @@ typedef struct s_main {
 void	rt_init(t_main *data, char *path);
 int		rt_clear(t_main *data);
 int		rt_key(int key, t_main *data);
+int		rt_render(t_main *data);
+
+void	img_pix_put(t_img *img, int x, int y, t_color color);
 
 t_point     create_vector(double x, double y, double z);
 t_point		vector_add(t_point a, t_point b);
@@ -84,6 +87,12 @@ double		vector_dot(t_point a, t_point b);
 t_point		vector_cross(t_point a, t_point b);
 t_point		unit_vector(t_point a);
 t_point		rotate_vector(t_point v, double x_rot, double y_rot, double z_rot);
+
+int		rgb_to_int(t_color color);
+t_color	color_add(t_color a, t_color b);
+t_color	color_substract(t_color a, t_color b);
+t_color	color_multiply(t_color a, double multiplier);
+t_color	color_divide(t_color a, double divisor);
 
 int		map_assign_position(t_object *obj, char *s);
 int		map_assign_color(t_object *obj, char *s);

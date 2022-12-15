@@ -52,10 +52,6 @@ void	map_read(t_main *data, char *path)
 	int		fd;
 
 	fd = map_open(path);
-	map_set_defalt(&data->ambient);
-	map_set_defalt(&data->camera);
-	map_set_defalt(&data->light);
-	data->obj = 0;
 	while (1)
 	{
 		line = get_next_line(fd);

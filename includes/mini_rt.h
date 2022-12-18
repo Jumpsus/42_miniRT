@@ -36,7 +36,7 @@ typedef struct s_point {
 
 typedef struct s_ray {
 	t_point	orig; // origin
-	t_point	dir;  // direction
+	t_point	dir;  // direction (must always be a unit vector)
 }	t_ray;
 
 typedef struct s_img {
@@ -54,7 +54,7 @@ typedef struct s_object {
 	t_point			norm;   // (normalized) for camera, plane and cylinder
 	double			ratio;  // for ambient and light
 	double			fov;   	// for camera
-	double			diam;   // (diameter) for sphere and cylinder
+	double			radius; // for sphere and cylinder
 	double			height; // for cylinder
 	struct s_object	*next;
 }	t_object;
@@ -90,6 +90,8 @@ double		vector_dot(t_point a, t_point b);
 t_point		vector_cross(t_point a, t_point b);
 t_point		unit_vector(t_point a);
 t_point		rotate_vector(t_point v, double x_rot, double y_rot, double z_rot);
+t_ray		create_ray(t_point orig, t_point dir);
+t_point		ray_at(t_ray x, double t);
 
 int		rgb_to_int(t_color color);
 t_color	color_add(t_color a, t_color b);

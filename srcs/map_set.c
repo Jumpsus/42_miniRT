@@ -8,7 +8,7 @@ void	map_set_defalt(t_object *obj)
 	obj->norm = (t_point){0, 0, 0};
 	obj->ratio = 0;
 	obj->fov = 0;
-	obj->diam = 0;
+	obj->radius = 0;
 	obj->height = 0;
 	obj->next = 0;
 }

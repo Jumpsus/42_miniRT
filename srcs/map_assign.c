@@ -98,6 +98,7 @@ a double in the range [-1,1]\n";
 			obj->norm.x = ft_atof(norm[0]);
 			obj->norm.y = ft_atof(norm[1]);
 			obj->norm.z = ft_atof(norm[2]);
+			obj->norm = unit_vector(obj->norm);
 			free_2d(norm);
 			return (1);
 		}
@@ -154,7 +155,7 @@ int	map_assign_diam_height(t_object *obj, char *s, char type)
 		if (type == 'h')
 			obj->height = ft_atof(s);
 		else if (type == 'd')
-			obj->diam = ft_atof(s);
+			obj->radius = ft_atof(s) * 0.5;
 		return (1);
 	}
 	ft_putstr_fd(err, STDERR_FILENO);

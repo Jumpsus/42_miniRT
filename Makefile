@@ -6,7 +6,7 @@ OBJ_DIR = objs/
 SRC_FILE = map_read map_assign map_set map_utils \
 	color_utils render_utils \
 	utils_matrix_1 utils_matrix_2 utils_matrix_3 \
-	main test
+	main test plane_intersect
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILE)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILE)))
 

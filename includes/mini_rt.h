@@ -56,6 +56,7 @@ typedef struct s_object {
 	double			fov;   	// for camera
 	double			diam;   // (diameter) for sphere and cylinder
 	double			height; // for cylinder
+	// double			half_ang; // half angle use for cone
 	struct s_object	*next;
 }	t_object;
 
@@ -75,6 +76,7 @@ int		rt_key(int key, t_main *data);
 int		rt_render(t_main *data);
 
 void	render_sphere(t_main *data);
+void	render_plane(t_main *data);
 
 void	img_pix_put(t_img *img, int x, int y, t_color color);
 

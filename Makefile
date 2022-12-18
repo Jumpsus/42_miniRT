@@ -3,7 +3,10 @@ NAME = miniRT
 SRC_DIR = srcs/
 OBJ_DIR = objs/
 
-SRC_FILE = 
+SRC_FILE = map_read map_assign map_set map_utils \
+	color_utils render_utils \
+	utils_matrix_1 utils_matrix_2 utils_matrix_3 \
+	main test
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILE)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILE)))
 
@@ -14,7 +17,7 @@ HDRS = $(addprefix $(HDR_DIR), $(addsuffix .h, $(HDR_FILE)))
 
 LIB_DIR = libft/
 LIB_INC = $(addprefix -I, $(addsuffix $(HDR_DIR), $(LIB_DIR)))
-LIB_BINARY = -Llibft -lft
+LIB_BINARY = -lm -Llibft -lft
 
 ifeq ($(shell uname), Linux)
 MLX = minilibx-linux

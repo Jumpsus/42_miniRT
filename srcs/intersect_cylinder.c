@@ -32,7 +32,8 @@ double	hit_cylinder(t_object cy, t_ray r)
 		return m2;
 
 	/*
-		I'm just guessing based on this sentence
+		The code below is for cylinder's cap,
+		but I'm just guessing based on this sentence
 		"Note that the ray may intersect both end caps, for example when z1 < z_min and z2 > z_max." 
 		source: https://www.cl.cam.ac.uk/teaching/1999/AGraphHCI/SMAG/node2.html#SECTION00023200000000000000
 	*/

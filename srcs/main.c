@@ -1,5 +1,7 @@
 #include "mini_rt.h"
 
+void	main_render(t_main *data);
+
 void	rt_init(t_main *data, char *path)
 {
 	data->obj = 0;
@@ -55,7 +57,7 @@ int	rt_render(t_main *data)
 	if (!data->win_ptr)
 		return (1);
 	//render_background(data);
-	render_sphere(data);
+	main_render(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img_ptr, 0, 0);
 	return (0);
 }

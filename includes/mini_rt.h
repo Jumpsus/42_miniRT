@@ -12,8 +12,8 @@
 # include "libft.h"
 # include "key.h"
 
-# define WINDOW_WIDTH	600
-# define WINDOW_HEIGHT	300
+# define WINDOW_WIDTH	1200
+# define WINDOW_HEIGHT	600
 
 # define AMBIENT	1
 # define CAMERA		2
@@ -122,6 +122,7 @@ double	hit_sphere(t_object sp, t_ray r);
 double	hit_plane(t_object pl, t_ray r);
 double	hit_cylinder(t_object cy, t_ray r);
 
+double	hit_object(t_object *obj, t_ray ray);
 double	solve_quadratic_minus(double a, double b, double c);
 double	solve_quadratic_plus(double a, double b, double c);
 

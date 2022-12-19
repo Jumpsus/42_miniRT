@@ -56,6 +56,7 @@ typedef struct s_object {
 	double			fov;   	// for camera
 	double			radius; // for sphere and cylinder
 	double			height; // for cylinder
+	// double			half_ang; // half angle use for cone
 	struct s_object	*next;
 }	t_object;
 

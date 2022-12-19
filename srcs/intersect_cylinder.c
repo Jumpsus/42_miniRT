@@ -26,10 +26,10 @@ double	hit_cylinder(t_object cy, t_ray r)
 	m1 = dv * t1 + xv;
 	m2 = dv * t2 + xv;
 
-	if (m1 >= 0 && m1 <= cy.height)
-		return m1;
 	if (m2 >= 0 && m2 <= cy.height)
 		return m2;
+	if (m1 >= 0 && m1 <= cy.height)
+		return m1;
 
 	/*
 		The code below is for cylinder's cap,

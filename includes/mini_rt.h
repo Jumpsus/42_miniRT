@@ -74,10 +74,7 @@ int		rt_clear(t_main *data);
 int		rt_key(int key, t_main *data);
 int		rt_render(t_main *data);
 
-void	render_sphere(t_main *data);
-
 void	img_pix_put(t_img *img, int x, int y, t_color color);
-
 
 t_point     create_vector(double x, double y, double z);
 t_point		vector_add(t_point a, t_point b);
@@ -120,5 +117,12 @@ void	standardize_columns(char **addr, char *str);
 void	print_obj(t_object *obj); // will be removed later
 
 void	map_read(t_main *data, char *path);
+
+double	hit_sphere(t_object sp, t_ray r);
+double	hit_plane(t_object pl, t_ray r);
+double	hit_cylinder(t_object cy, t_ray r);
+
+double	solve_quadratic_minus(double a, double b, double c);
+double	solve_quadratic_plus(double a, double b, double c);
 
 #endif

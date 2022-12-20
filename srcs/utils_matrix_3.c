@@ -12,6 +12,32 @@ t_point	rotate_vector(t_point v, double x_rot, double y_rot, double z_rot)
 	return (result);
 }
 
+/*
+	sample:
+
+	t_point	rotate = (t_point){0.5, 0.75, 1};
+	double	size = vector_length(rotate);
+	rotate_object(obj,
+		acos(rotate.x / size),
+		acos(rotate.y / size),
+		acos(rotate.z / size));
+*/
+void	rotate_object(t_object *obj, double x_rot, double y_rot, double z_rot)
+{
+	t_point result;
+
+	result.x = obj->norm.x * (cos(y_rot) * cos(z_rot))
+		+ obj->norm.y * (sin(x_rot) * sin(y_rot) * cos(z_rot) - cos(x_rot) * sin(y_rot))
+		+ obj->norm.z * (cos(x_rot) * sin(y_rot) * cos(z_rot) + sin(x_rot) * sin(y_rot));
+	result.y = obj->norm.x * (cos(y_rot) * sin(z_rot))
+		+ obj->norm.y * (sin(x_rot) * sin(y_rot) * sin(z_rot) + cos(x_rot) * cos(y_rot))
+		+ obj->norm.z * (cos(x_rot) * sin(y_rot) * sin(z_rot) - sin(x_rot) * cos(y_rot));
+	result.z = obj->norm.x * (-sin(y_rot))
+		+ obj->norm.y * (sin(x_rot) * cos(y_rot))
+		+ obj->norm.z * (cos(x_rot) * cos(y_rot));
+	obj->norm = unit_vector(result);
+}
+
 t_ray	create_ray(t_point orig, t_point dir)
 {
 	t_ray   result;

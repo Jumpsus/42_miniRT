@@ -40,6 +40,8 @@ static int	map_set(t_main *data, char *s)
 			ret = map_set_plane(init_obj(&data->obj), s + pos + 1);
 		else if (ft_strncmp(s, "cy", pos) == 0)
 			ret = map_set_cylinder(init_obj(&data->obj), s + pos + 1);
+		else if (ft_strncmp(s, "co", pos) == 0)
+			ret = map_set_cone(init_obj(&data->obj), s + pos + 1);
 		else
 			ft_putstr_fd("Error\ninvalid type of element\n", STDERR_FILENO);
 	}

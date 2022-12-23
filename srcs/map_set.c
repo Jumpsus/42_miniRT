@@ -151,3 +151,27 @@ int	map_set_cylinder(t_object *obj, char *s)
 	//print_obj(obj);
 	return (obj->id);
 }
+
+int	map_set_cone(t_object *obj, char *s)
+{
+	char	**inp;
+	char	*err;
+
+	err = "Error\ncone must only consist of xyz coordinates, \
+3d normalized orientation vector, cone degree and rgb colors\n";
+	inp = ft_split(s, ' ');
+	if (size_2d(inp) == 5)
+	{
+		if (map_assign_position(obj, inp[0]))
+			if (map_assign_normalized(obj, inp[1]))
+				if (map_assign_diam_height(obj, inp[2], 'h'))
+					if (map_assign_angle(obj, inp[3]))
+						if (map_assign_color(obj, inp[4]))
+							obj->id = CONE;
+	}
+	else
+		ft_putstr_fd(err, STDERR_FILENO);
+	free_2d(inp);
+	print_obj(obj);
+	return (obj->id);
+}

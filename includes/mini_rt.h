@@ -21,6 +21,7 @@
 # define SPHERE		4
 # define PLANE		5
 # define CYLINDER	6
+# define CONE		7
 
 typedef struct s_color {
 	double	r;
@@ -56,7 +57,7 @@ typedef struct s_object {
 	double			fov;   	// for camera
 	double			radius; // for sphere and cylinder
 	double			height; // for cylinder
-	// double			half_ang; // half angle use for cone
+	double			angle;  // angle use for cone
 	struct s_object	*next;
 }	t_object;
 
@@ -77,6 +78,7 @@ int		rt_render(t_main *data);
 
 void	render_sphere(t_main *data);
 void	render_plane(t_main *data);
+void	render_cone(t_main *data);
 
 void	img_pix_put(t_img *img, int x, int y, t_color color);
 
@@ -107,6 +109,7 @@ int		map_assign_normalized(t_object *obj, char *s);
 int		map_assign_ratio(t_object *obj, char *s);
 int		map_assign_view(t_object *obj, char *s);
 int		map_assign_diam_height(t_object *obj, char *s, char type);
+int		map_assign_angle(t_object *obj, char *s);
 
 void	map_set_defalt(t_object *obj);
 int		map_set_ambient(t_object *obj, char *s);
@@ -115,6 +118,7 @@ int		map_set_light(t_object *obj, char *s);
 int		map_set_sphere(t_object *obj, char *s);
 int		map_set_plane(t_object *obj, char *s);
 int		map_set_cylinder(t_object *obj, char *s);
+int		map_set_cone(t_object *obj, char *s);
 
 t_object	*init_obj(t_object **obj);
 void	map_clear(t_main *data);

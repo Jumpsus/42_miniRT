@@ -56,7 +56,8 @@ int	rt_render(t_main *data)
 		return (1);
 	//render_background(data);
 	//render_sphere(data);
-	render_plane(data);
+	//render_plane(data);
+	render_cone(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr, data->img.img_ptr, 0, 0);
 	return (0);
 }

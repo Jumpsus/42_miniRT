@@ -161,3 +161,18 @@ int	map_assign_diam_height(t_object *obj, char *s, char type)
 	ft_putstr_fd(err, STDERR_FILENO);
 	return (0);
 }
+
+int	map_assign_angle(t_object *obj, char *s)
+{
+	char	*err;
+
+	err = "Error\nangle must be of the format \
+\"n\" where n is a double in the range [0,180]\n";
+	if (check_input(s, 0, 180, 0))
+	{
+		obj->angle = ft_atof(s);
+		return (1);
+	}
+	ft_putstr_fd(err, STDERR_FILENO);
+	return (0);
+}

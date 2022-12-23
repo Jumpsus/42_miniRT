@@ -2,17 +2,18 @@
 
 #include "mini_rt.h"
 
-t_point	ray_at(t_ray x, double t)
-{
-    return (vector_add(x.orig, vector_multiply(x.dir, t)));
-}
+// t_point	ray_at(t_ray x, double t)
+// {
+//     return (vector_add(x.orig, vector_multiply(x.dir, t)));
+// }
 
 int	hit_sphere(t_object *sphere, t_ray r)
 {
 	t_point	oc = vector_subtract(r.orig, sphere->pos);
 	double	a = vector_square_length(r.dir);
 	double	half_b = vector_dot(oc, r.dir);
-    double	c = vector_square_length(oc) - pow(0.5 * sphere->diam, 2);
+    // double	c = vector_square_length(oc) - pow(0.5 * sphere->diam, 2);
+	double c = 1;
 	double	discriminant = pow(half_b, 2) - a * c;
 	if (discriminant < 0)
 		return (-1);

@@ -60,6 +60,15 @@ typedef struct s_object {
 	struct s_object	*next;
 }	t_object;
 
+typedef struct s_camera {
+	t_point			eye;
+	t_point			forward;			
+	t_point			up;
+	t_point			right;
+	double			h;
+	double			w;
+}	t_camera;
+
 typedef struct s_main {
 	void		*mlx_ptr;
 	void		*win_ptr;

@@ -5,7 +5,7 @@ OBJ_DIR = objs/
 
 SRC_FILE = map_read map_assign map_set map_utils \
 	plane_intersect intersect_sphere intersect_cylinder intersect_utils \
-	color_utils render_utils \
+	color_utils render_utils camera\
 	utils_matrix_1 utils_matrix_2 utils_matrix_3 \
 	main render_test
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILE)))

@@ -5,10 +5,10 @@ void	main_render(t_main *data);
 void	rt_init(t_main *data, char *path)
 {
 	data->obj = 0;
-	map_set_defalt(&data->ambient);
-	map_set_defalt(&data->camera);
-	map_set_defalt(&data->light);
-	map_read(data, path);
+	scene_set_defalt(&data->ambient);
+	scene_set_defalt(&data->camera);
+	scene_set_defalt(&data->light);
+	scene_read(data, path);
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr,
 		WINDOW_WIDTH, WINDOW_HEIGHT, "miniRT");
@@ -25,7 +25,7 @@ int	rt_clear(t_main *data)
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	mlx_destroy_display(data->mlx_ptr);
 	free(data->mlx_ptr);
-	map_clear(data);
+	scene_clear(data);
 	exit(EXIT_SUCCESS);
 }
 
@@ -36,7 +36,7 @@ int	rt_clear(t_main *data)
 	mlx_destroy_image(data->mlx_ptr, data->img.img_ptr);
 	mlx_destroy_window(data->mlx_ptr, data->win_ptr);
 	free(data->mlx_ptr);
-	map_clear(data);
+	scene_clear(data);
 	exit(EXIT_SUCCESS);
 }
 

@@ -34,7 +34,7 @@ static int	check_all_input(char **inp, double start, double end, int is_int)
 	return (1);
 }
 
-int	map_assign_position(t_object *obj, char *s)
+int	scene_assign_position(t_object *obj, char *s)
 {
 	char	**pos;
 	char	*err;
@@ -58,7 +58,7 @@ the format \"n,n,n\" where n is a double\n";
 	return (0);
 }
 
-int	map_assign_color(t_object *obj, char *s)
+int	scene_assign_color(t_object *obj, char *s)
 {
 	char	**color;
 	char	*err;
@@ -73,6 +73,7 @@ int	map_assign_color(t_object *obj, char *s)
 			obj->color.r = ft_atoi(color[0]);
 			obj->color.g = ft_atoi(color[1]);
 			obj->color.b = ft_atoi(color[2]);
+			obj->color = color_divide(obj->color, 255);
 			free_2d(color);
 			return (1);
 		}
@@ -82,7 +83,7 @@ int	map_assign_color(t_object *obj, char *s)
 	return (0);
 }
 
-int	map_assign_normalized(t_object *obj, char *s)
+int	scene_assign_normalized(t_object *obj, char *s)
 {
 	char	**norm;
 	char	*err;
@@ -108,7 +109,7 @@ a double in the range [-1,1]\n";
 	return (0);
 }
 
-int	map_assign_ratio(t_object *obj, char *s)
+int	scene_assign_ratio(t_object *obj, char *s)
 {
 	char	*err;
 
@@ -123,7 +124,7 @@ int	map_assign_ratio(t_object *obj, char *s)
 	return (0);
 }
 
-int	map_assign_view(t_object *obj, char *s)
+int	scene_assign_view(t_object *obj, char *s)
 {
 	char	*err;
 
@@ -138,7 +139,7 @@ int	map_assign_view(t_object *obj, char *s)
 	return (0);
 }
 
-int	map_assign_diam_height(t_object *obj, char *s, char type)
+int	scene_assign_diam_height(t_object *obj, char *s, char type)
 {
 	char	*err;
 

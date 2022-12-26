@@ -5,13 +5,13 @@ t_object	*init_obj(t_object **obj)
 	if (!*obj)
 	{
 		*obj = malloc(sizeof(**obj));
-		map_set_defalt(*obj);
+		scene_set_defalt(*obj);
 		return (*obj);
 	}
 	return (init_obj(&(*obj)->next));
 }
 
-void	map_clear(t_main *data)
+void	scene_clear(t_main *data)
 {
 	t_object	*cur;
 	t_object	*next;

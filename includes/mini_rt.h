@@ -98,27 +98,29 @@ t_color	color_substract(t_color a, t_color b);
 t_color	color_multiply(t_color a, double multiplier);
 t_color	color_divide(t_color a, double divisor);
 
-int		map_assign_position(t_object *obj, char *s);
-int		map_assign_color(t_object *obj, char *s);
-int		map_assign_normalized(t_object *obj, char *s);
-int		map_assign_ratio(t_object *obj, char *s);
-int		map_assign_view(t_object *obj, char *s);
-int		map_assign_diam_height(t_object *obj, char *s, char type);
+/* scene_assign */
+int		scene_assign_position(t_object *obj, char *s);
+int		scene_assign_color(t_object *obj, char *s);
+int		scene_assign_normalized(t_object *obj, char *s);
+int		scene_assign_ratio(t_object *obj, char *s);
+int		scene_assign_view(t_object *obj, char *s);
+int		scene_assign_diam_height(t_object *obj, char *s, char type);
 
-void	map_set_defalt(t_object *obj);
-int		map_set_ambient(t_object *obj, char *s);
-int		map_set_camera(t_object *obj, char *s);
-int		map_set_light(t_object *obj, char *s);
-int		map_set_sphere(t_object *obj, char *s);
-int		map_set_plane(t_object *obj, char *s);
-int		map_set_cylinder(t_object *obj, char *s);
+/* scene_set */
+void	scene_set_defalt(t_object *obj);
+int		scene_set_ambient(t_object *obj, char *s);
+int		scene_set_camera(t_object *obj, char *s);
+int		scene_set_light(t_object *obj, char *s);
+int		scene_set_sphere(t_object *obj, char *s);
+int		scene_set_plane(t_object *obj, char *s);
+int		scene_set_cylinder(t_object *obj, char *s);
 
 t_object	*init_obj(t_object **obj);
-void	map_clear(t_main *data);
+void	scene_clear(t_main *data);
 void	standardize_columns(char **addr, char *str);
 void	print_obj(t_object *obj); // will be removed later
 
-void	map_read(t_main *data, char *path);
+void	scene_read(t_main *data, char *path);
 
 double	hit_sphere(t_object sp, t_ray r);
 double	hit_plane(t_object pl, t_ray r);

@@ -32,7 +32,17 @@ t_color	color_substract(t_color a, t_color b)
 	return (result);
 }
 
-t_color	color_multiply(t_color a, double multiplier)
+t_color	color_multiply_color(t_color a, t_color b)
+{
+	t_color	result;
+
+	result.r = a.r * b.r;
+	result.g = a.g * b.g;
+	result.b = a.b * b.b;
+	return (result);
+}
+
+t_color	color_multiply_n(t_color a, double multiplier)
 {
 	t_color	result;
 
@@ -44,5 +54,19 @@ t_color	color_multiply(t_color a, double multiplier)
 
 t_color	color_divide(t_color a, double divisor)
 {
-	return (color_multiply(a, (1 / divisor)));
+	return (color_multiply_n(a, (1 / divisor)));
+}
+
+t_color	color_normalize(t_color a)
+{
+	t_color	result;
+
+	result = a;
+	if (result.r > 1)
+		result.r = 1;
+	if (result.g > 1)
+		result.g = 1;
+	if (result.b > 1)
+		result.b = 1;
+	return (result);
 }

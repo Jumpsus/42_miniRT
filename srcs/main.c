@@ -15,6 +15,7 @@ void	rt_init(t_main *data, char *path)
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr, WINDOW_WIDTH, WINDOW_HEIGHT);
 	data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
 		&data->img.line, &data->img.endian);
+	data->background = (t_color){0, 0, 0};
 }
 
 #ifdef __linux__

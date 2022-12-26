@@ -60,10 +60,19 @@ typedef struct s_object {
 	struct s_object	*next;
 }	t_object;
 
+typedef struct s_hit {
+	int			is_hit;
+	double		t;
+	t_point		hit_pos;
+	t_point		hit_norm;
+	t_object	*hit_obj;
+}	t_hit;
+
 typedef struct s_main {
 	void		*mlx_ptr;
 	void		*win_ptr;
 	t_img		img;
+	t_color		background;
 	t_object	ambient;
 	t_object	camera;
 	t_object	light;
@@ -92,11 +101,13 @@ void		rotate_object(t_object *obj, double x_rot, double y_rot, double z_rot);
 t_ray		create_ray(t_point orig, t_point dir);
 t_point		ray_at(t_ray x, double t);
 
+/* color_utils */
 int		rgb_to_int(t_color color);
 t_color	color_add(t_color a, t_color b);
 t_color	color_substract(t_color a, t_color b);
 t_color	color_multiply(t_color a, double multiplier);
 t_color	color_divide(t_color a, double divisor);
+t_color	color_normalize(t_color a);
 
 /* scene_assign */
 int		scene_assign_position(t_object *obj, char *s);
@@ -122,12 +133,16 @@ void	print_obj(t_object *obj); // will be removed later
 
 void	scene_read(t_main *data, char *path);
 
-double	hit_sphere(t_object sp, t_ray r);
-double	hit_plane(t_object pl, t_ray r);
-double	hit_cylinder(t_object cy, t_ray r);
+/* hit */
+t_hit	hit_object(t_main *data, t_ray r);
+t_hit	hit_sphere(t_object *sp, t_ray r);
+t_hit	hit_plane(t_object *pl, t_ray r);
+t_hit	hit_cylinder(t_object *cy, t_ray r);
 
-double	hit_object(t_object *obj, t_ray ray);
+/* hit_utils */
 double	solve_quadratic_minus(double a, double b, double c);
 double	solve_quadratic_plus(double a, double b, double c);
+t_hit	set_hit_property(double t, t_object *obj, t_ray r);
+t_hit	select_hit(t_hit a, t_hit b);
 
 #endif

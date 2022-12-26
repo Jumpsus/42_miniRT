@@ -1,5 +1,18 @@
 #include "mini_rt.h"
 
+// t_color	ray_color(t_object *obj, t_ray r)
+// {
+// 	double	t;
+
+// 	t = hit_object(obj, r);
+// 	if (t > 0)
+// 	{
+// 		return ((t_color){ 1, 0, 0 });
+// 	}
+// 	return ((t_color){ 255, 0, 0 });
+// }
+
+
 t_camera    make_camera(t_object camera, t_point forward)
 {
     t_camera    cam;
@@ -25,13 +38,13 @@ t_ray   make_ray(t_camera cam, double u, double v){
     return create_ray(cam.eye, unit_vector(vector));
 }
 
-t_ray	camera_render(t_main *data)
+void	camera_render(t_main *data)
 {
     t_camera       cam;
     t_ray          ray_cood;
     t_point        forward;
 
-    forward = create_vector(0,0,-1);
+    forward = create_vector(data->obj->pos.x, data->obj->pos.y, data->obj->pos.z);
     cam = make_camera(data->camera, forward);
 
     int i = 0;
@@ -40,9 +53,9 @@ t_ray	camera_render(t_main *data)
         i = 0;
         while (i < WINDOW_WIDTH){
             ray_cood = make_ray(cam, (2.0 * i / WINDOW_WIDTH) - 1.0, (-2.0 * j / WINDOW_HEIGHT) + 1.0);
+            img_pix_put(&data->img, i, j, ray_color(data->obj, ray_cood));
             i++;
         }
         j++;
     }
-    return (ray_cood);
 }

@@ -1,5 +1,14 @@
 #include "mini_rt.h"
 
+int		is_zero(t_point vector)
+{
+	if (vector.x == 0 && vector.y == 0 && vector.z == 0)
+	{
+		return (1);
+	}
+	return (0);
+}
+
 /* source: https://en.wikipedia.org/wiki/Rotation_matrix */
 t_point	rotate_vector(t_point v, double x_rot, double y_rot, double z_rot)
 {

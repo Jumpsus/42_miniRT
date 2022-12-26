@@ -30,6 +30,10 @@ t_point  unit_vector(t_point a)
 {
     t_point result;
 
+    if (vector_length(a) == 0)
+    {
+        return (a);
+    }
     result.x = a.x / vector_length(a);
     result.y = a.y / vector_length(a);
     result.z = a.z / vector_length(a);

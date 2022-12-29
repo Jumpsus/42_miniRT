@@ -5,7 +5,7 @@ OBJ_DIR = objs/
 
 SRC_FILE = scene_read scene_assign scene_set scene_utils \
 	hit hit_sphere hit_plane hit_cylinder hit_utils \
-	trace color_utils render_utils \
+	camera trace color_utils render_utils \
 	utils_matrix_1 utils_matrix_2 utils_matrix_3 \
 	main render_test
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILE)))

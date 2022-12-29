@@ -70,6 +70,15 @@ typedef struct s_hit {
 	t_object	*hit_obj;
 }	t_hit;
 
+typedef struct s_camera {
+	t_point			eye;
+	t_point			forward;			
+	t_point			up;
+	t_point			right;
+	double			h;
+	double			w;
+}	t_camera;
+
 typedef struct s_main {
 	void		*mlx_ptr;
 	void		*win_ptr;
@@ -150,5 +159,7 @@ t_hit	select_hit(t_hit a, t_hit b);
 
 /* trace */
 t_color	trace(t_main *data, t_ray r);
+
+void	camera_render(t_main *data);
 
 #endif

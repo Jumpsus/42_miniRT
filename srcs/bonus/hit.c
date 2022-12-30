@@ -1,4 +1,4 @@
-#include "mini_rt.h"
+#include "mini_rt_bonus.h"
 
 // page-38 https://www.cs.cornell.edu/courses/cs4620/2014fa/lectures/04rt-intersect.pdf
 t_hit	hit_object(t_main *data, t_ray ray)
@@ -17,6 +17,8 @@ t_hit	hit_object(t_main *data, t_ray ray)
 			hit = hit_plane(cur, ray);
 		else if (cur->id == CYLINDER)
 			hit = hit_cylinder(cur, ray);
+		else if (cur->id == CONE)
+			hit = hit_cone(cur, ray);
 		if (hit.is_hit)
 		{
 			if (!best.is_hit || hit.t < best.t)

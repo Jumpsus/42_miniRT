@@ -1,4 +1,4 @@
-#include "mini_rt.h"
+#include "mini_rt_bonus.h"
 
 void	scene_set_defalt(t_object *obj)
 {
@@ -151,3 +151,26 @@ vector, diameter, height and rgb colors", STDERR_FILENO);
 	free_2d(inp);
 	return (obj->id);
 }
+
+int	scene_set_cone(t_object *obj, char *s)
+{
+	char	**inp;
+
+	inp = ft_split(s, ' ');
+	if (size_2d(inp) == 5)
+	{
+		if (scene_assign_position(obj, inp[0]))
+			if (scene_assign_normalized(obj, inp[1]))
+				if (scene_assign_diam_height(obj, inp[2], 'd'))
+					if (scene_assign_diam_height(obj, inp[3], 'h'))
+						if (scene_assign_color(obj, inp[4]))
+							obj->id = CONE;
+	}
+	else
+		ft_putendl_fd("Error\nCone must only \
+consist of xyz coordinates, 3d normalized orientation \
+vector, diameter, height and rgb colors", STDERR_FILENO);
+	free_2d(inp);
+	return (obj->id);
+}
+

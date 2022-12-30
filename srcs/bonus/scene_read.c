@@ -1,4 +1,4 @@
-#include "mini_rt.h"
+#include "mini_rt_bonus.h"
 
 static int	scene_open(char *path)
 {
@@ -32,14 +32,16 @@ static int	scene_set(t_main *data, char *s)
 			ret = scene_set_ambient(&data->ambient, s + pos + 1);
 		else if (ft_strncmp(s, "C", pos) == 0)
 			ret = scene_set_camera(&data->camera, s + pos + 1);
-		else if (ft_strncmp(s, "L", pos) == 0)
-			ret = scene_set_light(&data->light, s + pos + 1);
+		else if (ft_strncmp(s, "l", pos) == 0 || ft_strncmp(s, "L", pos) == 0)
+			ret = scene_set_light(init_obj(&data->light), s + pos + 1);
 		else if (ft_strncmp(s, "sp", pos) == 0)
 			ret = scene_set_sphere(init_obj(&data->obj), s + pos + 1);
 		else if (ft_strncmp(s, "pl", pos) == 0)
 			ret = scene_set_plane(init_obj(&data->obj), s + pos + 1);
 		else if (ft_strncmp(s, "cy", pos) == 0)
 			ret = scene_set_cylinder(init_obj(&data->obj), s + pos + 1);
+		else if (ft_strncmp(s, "co", pos) == 0)
+			ret = scene_set_cone(init_obj(&data->obj), s + pos + 1);
 		else
 			ft_putendl_fd("Error\nInvalid type of element", STDERR_FILENO);
 	}

@@ -1,4 +1,4 @@
-#include "mini_rt.h"
+#include "mini_rt_bonus.h"
 
 static int	check_input(char *s, double start, double end, int is_int)
 {

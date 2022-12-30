@@ -6,13 +6,22 @@ OBJ_DIR = objs/
 SRC_FILE = scene_read scene_assign scene_set scene_utils \
 	hit hit_sphere hit_plane hit_cylinder hit_utils \
 	camera trace color_utils render_utils \
-	matrix_utils vect_utils_1 vect_utils_2 vect_utils_3 \
+	vect_utils_1 vect_utils_2 vect_utils_3 matrix_utils \
 	main
-SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILE)))
-OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILE)))
+
+ifdef WITH_BONUS
+SRC_FILE += hit_cone
+DIR = bonus/
+HDR_FILE = mini_rt_bonus
+else
+DIR = mendatory/
+HDR_FILE = mini_rt
+endif
+
+SRCS = $(addprefix $(SRC_DIR)$(DIR), $(addsuffix .c, $(SRC_FILE)))
+OBJS = $(addprefix $(OBJ_DIR)$(DIR), $(addsuffix .o, $(SRC_FILE)))
 
 HDR_DIR = includes/
-HDR_FILE = mini_rt
 HDR_INC = $(addprefix -I, $(HDR_DIR))
 HDRS = $(addprefix $(HDR_DIR), $(addsuffix .h, $(HDR_FILE)))
 
@@ -45,10 +54,11 @@ $(NAME): $(OBJS)
 	$(CC) $(CFLAGS) $(OBJS) -o $@ $(LIB_BINARY)
 	@echo "/// ----- tik tak boom ------ ///"
 
-bonus: all
+bonus:
+	make WITH_BONUS=1 all
 
-$(OBJ_DIR)%.o: $(SRC_DIR)%.c
-	@mkdir -p $(OBJ_DIR)
+$(OBJ_DIR)$(DIR)%.o: $(SRC_DIR)$(DIR)%.c
+	@mkdir -p $(OBJ_DIR)$(DIR)
 	$(CC) $(CFLAGS) $(HDR_INC) $(LIB_INC) -c $< -o $@
 
 lib:

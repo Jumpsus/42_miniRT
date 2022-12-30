@@ -1,4 +1,4 @@
-#include "mini_rt.h"
+#include "mini_rt_bonus.h"
 
 t_object	*init_obj(t_object **obj)
 {

@@ -1,4 +1,4 @@
-#include "mini_rt.h"
+#include "mini_rt_bonus.h"
 
 // source: https://gontjarow.github.io/MiniLibX/mlx-tutorial-draw-pixel.html
 int rgb_to_int(t_color color)

@@ -1,6 +1,6 @@
-#include "mini_rt.h"
+# include "vector.h"
 
-int		is_zero(t_point vector)
+int	is_zero(t_point vector)
 {
 	return (vector.x == 0 && vector.y == 0 && vector.z == 0);
 }
@@ -8,12 +8,11 @@ int		is_zero(t_point vector)
 /* source: https://en.wikipedia.org/wiki/Rotation_matrix */
 t_point	rotate_vector(t_point v, double x_rot, double y_rot, double z_rot)
 {
-	t_point result;
+	t_point	result;
 
 	result = create_vector(v.x, v.y * cos(x_rot) - v.z * sin(x_rot), v.y * sin(x_rot) + v.z * cos(x_rot));
 	result = create_vector(v.x * cos(y_rot) + v.z * sin(y_rot), v.y, v.z * cos(y_rot) - v.x * sin(y_rot));
 	result = create_vector(v.x * cos(z_rot) - v.y * sin(z_rot), v.x * sin(z_rot) + v.y * cos(z_rot), v.z);
-
 	return (result);
 }
 
@@ -27,25 +26,25 @@ t_point	rotate_vector(t_point v, double x_rot, double y_rot, double z_rot)
 		acos(rotate.y / size),
 		acos(rotate.z / size));
 */
-void	rotate_object(t_object *obj, double x_rot, double y_rot, double z_rot)
-{
-	t_point result;
+// void	rotate_object(t_object *obj, double x_rot, double y_rot, double z_rot)
+// {
+// 	t_point result;
 
-	result.x = obj->norm.x * (cos(y_rot) * cos(z_rot))
-		+ obj->norm.y * (sin(x_rot) * sin(y_rot) * cos(z_rot) - cos(x_rot) * sin(y_rot))
-		+ obj->norm.z * (cos(x_rot) * sin(y_rot) * cos(z_rot) + sin(x_rot) * sin(y_rot));
-	result.y = obj->norm.x * (cos(y_rot) * sin(z_rot))
-		+ obj->norm.y * (sin(x_rot) * sin(y_rot) * sin(z_rot) + cos(x_rot) * cos(y_rot))
-		+ obj->norm.z * (cos(x_rot) * sin(y_rot) * sin(z_rot) - sin(x_rot) * cos(y_rot));
-	result.z = obj->norm.x * (-sin(y_rot))
-		+ obj->norm.y * (sin(x_rot) * cos(y_rot))
-		+ obj->norm.z * (cos(x_rot) * cos(y_rot));
-	obj->norm = unit_vector(result);
-}
+// 	result.x = obj->norm.x * (cos(y_rot) * cos(z_rot))
+// 		+ obj->norm.y * (sin(x_rot) * sin(y_rot) * cos(z_rot) - cos(x_rot) * sin(y_rot))
+// 		+ obj->norm.z * (cos(x_rot) * sin(y_rot) * cos(z_rot) + sin(x_rot) * sin(y_rot));
+// 	result.y = obj->norm.x * (cos(y_rot) * sin(z_rot))
+// 		+ obj->norm.y * (sin(x_rot) * sin(y_rot) * sin(z_rot) + cos(x_rot) * cos(y_rot))
+// 		+ obj->norm.z * (cos(x_rot) * sin(y_rot) * sin(z_rot) - sin(x_rot) * cos(y_rot));
+// 	result.z = obj->norm.x * (-sin(y_rot))
+// 		+ obj->norm.y * (sin(x_rot) * cos(y_rot))
+// 		+ obj->norm.z * (cos(x_rot) * cos(y_rot));
+// 	obj->norm = unit_vector(result);
+// }
 
 t_ray	create_ray(t_point orig, t_point dir)
 {
-	t_ray   result;
+	t_ray	result;
 
 	result.orig = orig;
 	result.dir = unit_vector(dir);

@@ -6,8 +6,8 @@ OBJ_DIR = objs/
 SRC_FILE = scene_read scene_assign scene_set scene_utils \
 	hit hit_sphere hit_plane hit_cylinder hit_utils \
 	camera trace color_utils render_utils \
-	utils_matrix_1 utils_matrix_2 utils_matrix_3 \
-	main render_test
+	matrix_utils vect_utils_1 vect_utils_2 vect_utils_3 \
+	main
 SRCS = $(addprefix $(SRC_DIR), $(addsuffix .c, $(SRC_FILE)))
 OBJS = $(addprefix $(OBJ_DIR), $(addsuffix .o, $(SRC_FILE)))
 
@@ -17,7 +17,7 @@ HDR_INC = $(addprefix -I, $(HDR_DIR))
 HDRS = $(addprefix $(HDR_DIR), $(addsuffix .h, $(HDR_FILE)))
 
 LIB_DIR = libft/
-LIB_INC = $(addprefix -I, $(addsuffix $(HDR_DIR), $(LIB_DIR)))
+LIB_INC = $(addprefix -I, $(addsuffix $(HDR_DIR), $(filter-out $(MLX), $(LIB_DIR))))
 LIB_BINARY = -lm -Llibft -lft
 
 ifeq ($(shell uname), Linux)

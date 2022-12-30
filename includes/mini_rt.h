@@ -24,6 +24,12 @@
 # define PLANE		5
 # define CYLINDER	6
 
+typedef struct s_matrix {
+	int		n_row;
+	int		n_col;
+	double	*data;
+}	t_matrix;
+
 typedef struct s_color {
 	double	r;
 	double	g;
@@ -95,6 +101,7 @@ int		rt_clear(t_main *data);
 int		rt_key(int key, t_main *data);
 int		rt_render(t_main *data);
 
+void	camera_render(t_main *data);
 void	img_pix_put(t_img *img, int x, int y, t_color color);
 
 t_point     create_vector(double x, double y, double z);
@@ -160,6 +167,13 @@ t_hit	select_hit(t_hit a, t_hit b);
 /* trace */
 t_color	trace(t_main *data, t_ray r);
 
-void	camera_render(t_main *data);
+t_matrix	*create_matrix(int n_row, int n_col);
+void		delete_matrix(t_matrix *mtx);
+double		matrix_get(t_matrix *mtx, int row, int col);
+void		matrix_set(t_matrix *mtx, int row, int col, double val);
+t_matrix	*matrix_multiply(t_matrix *a, t_matrix *b);
+t_matrix	*get_orientation_matrix(t_point xaxis, t_point yaxis, t_point zaxis);
+t_matrix	*get_translation_matrix(t_point eye);
+t_matrix	*get_view_matrix(t_point xaxis, t_point yaxis, t_point zaxis, t_point eye);
 
 #endif

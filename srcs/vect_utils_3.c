@@ -1,8 +1,8 @@
 #include "mini_rt.h"
 
-int		is_zero(t_point vector)
+int		is_vector_equal(t_point a, t_point b)
 {
-	return (vector.x == 0 && vector.y == 0 && vector.z == 0);
+	return (a.x == b.x && a.y == b.y && a.z == b.z);
 }
 
 /* source: https://en.wikipedia.org/wiki/Rotation_matrix */

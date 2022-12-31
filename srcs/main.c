@@ -44,6 +44,34 @@ int	rt_clear(t_main *data)
 
 #endif
 
+int	rt_adjust_trans(int key, t_main *data){
+	if (key == K_UP) {
+		data->camera.pos = vector_add(data->camera.pos, data->use_camera.up);
+	} else if (key == K_DOWN) {
+		data->camera.pos = vector_subtract(data->camera.pos, data->use_camera.up);
+	} else if (key == K_RIGHT) {
+		data->camera.pos = vector_add(data->camera.pos, data->use_camera.right);
+	} else if (key == K_LEFT) {
+		data->camera.pos = vector_subtract(data->camera.pos, data->use_camera.right);
+	}
+	rt_render(data);
+	return (0);
+}
+
+int	rt_adjust_rots(int key, t_main *data){
+	if (key == K_W) {
+		data->camera.norm = unit_vector(vector_add(data->camera.norm, vector_multiply(data->use_camera.up, 0.1)));
+	} else if (key == K_S) {
+		data->camera.norm = unit_vector(vector_subtract(data->camera.norm, vector_multiply(data->use_camera.up, 0.1)));
+	} else if (key == K_A) {
+		data->camera.norm = unit_vector(vector_subtract(data->camera.norm, vector_multiply(data->use_camera.right, 0.1)));
+	} else if (key == K_D) {
+		data->camera.norm = unit_vector(vector_add(data->camera.norm, vector_multiply(data->use_camera.right, 0.1)));
+	}
+	rt_render(data);
+	return (0);
+}
+
 int	rt_key(int key, t_main *data)
 {
 	if (key == K_ESC)
@@ -51,6 +79,44 @@ int	rt_key(int key, t_main *data)
 		printf("EXIT\n");
 		rt_clear(data);
 	}
+
+	if (key == K_UP || key == K_DOWN || key == K_LEFT || key == K_RIGHT)
+	{
+		rt_adjust_trans(key, data);
+	}
+
+	if (key == K_A || key == K_W || key == K_S || key == K_D)
+	{
+		rt_adjust_rots(key, data);
+	}
+
+	// else if (key == K_UP){
+	// 	printf("UP X:%f y:%f z:%f\n", data->use_camera.up.x, data->use_camera.up.y, data->use_camera.up.z);
+	// 	data->camera.norm.x = data->camera.norm.x + data->use_camera.up.x * 0.1;
+	// 	data->camera.norm.y = data->camera.norm.y + data->use_camera.up.y * 0.1;
+	// 	data->camera.norm.z = data->camera.norm.z + data->use_camera.up.z * 0.1;
+	// 	rt_render(data);
+	// }
+	// else if (key == K_DOWN){
+	// 	printf("DOWN X:%f y:%f z:%f\n", data->use_camera.up.x, data->use_camera.up.y, data->use_camera.up.z);
+	// 	data->camera.norm.x = data->camera.norm.x - data->use_camera.up.x * 0.1;
+	// 	data->camera.norm.y = data->camera.norm.y - data->use_camera.up.y * 0.1;
+	// 	data->camera.norm.z = data->camera.norm.z - data->use_camera.up.z * 0.1;
+	// 	rt_render(data);
+	// }
+	// else if (key == K_RIGHT){
+	// 	printf("RIGHT \n");
+	// 	data->camera.norm.x = data->camera.norm.x + data->use_camera.right.x * 0.1;
+	// 	data->camera.norm.y = data->camera.norm.y + data->use_camera.right.y * 0.1;
+	// 	data->camera.norm.z = data->camera.norm.z + data->use_camera.right.z * 0.1;
+	// 	rt_render(data);
+	// } else if (key == K_LEFT){
+	// 	printf("LEFT \n");
+	// 	data->camera.norm.x = data->camera.norm.x - data->use_camera.right.x * 0.1;
+	// 	data->camera.norm.y = data->camera.norm.y - data->use_camera.right.y * 0.1;
+	// 	data->camera.norm.z = data->camera.norm.z - data->use_camera.right.z * 0.1;
+	// 	rt_render(data);
+	// }
 	return (EXIT_SUCCESS);
 }
 

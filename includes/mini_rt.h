@@ -93,6 +93,7 @@ typedef struct s_main {
 	t_object	ambient;
 	t_object	camera;
 	t_object	light;
+	t_camera	use_camera;
 	t_object	*obj;
 }	t_main;
 
@@ -100,6 +101,7 @@ void	rt_init(t_main *data, char *path);
 int		rt_clear(t_main *data);
 int		rt_key(int key, t_main *data);
 int		rt_render(t_main *data);
+int		rt_re_render(t_main *data);
 
 void	camera_render(t_main *data);
 void	img_pix_put(t_img *img, int x, int y, t_color color);
@@ -114,6 +116,7 @@ double		vector_length(t_point a);
 double		vector_dot(t_point a, t_point b);
 t_point		vector_cross(t_point a, t_point b);
 t_point		unit_vector(t_point a);
+int			is_vector_equal(t_point a, t_point b)
 t_point		rotate_vector(t_point v, double x_rot, double y_rot, double z_rot);
 void		rotate_object(t_object *obj, double x_rot, double y_rot, double z_rot);
 t_ray		create_ray(t_point orig, t_point dir);

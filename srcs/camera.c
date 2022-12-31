@@ -19,14 +19,11 @@ static t_camera	make_camera(t_object camera)
 	return (cam);
 }
 
-//	 vector = forward + (u * cam.w) * up_vector + (v * cam.h) * right_vector;
-//	 u and v are cood
 t_ray   make_ray(t_camera cam, double u, double v)
 {
 	t_point vector;
 	
 	vector = vector_add(vector_add(cam.forward, vector_multiply(cam.right, u * cam.w)), vector_multiply(cam.up, v * cam.h));
-	// vector = vector_subtract(vector, cam.eye);
 	return create_ray(cam.eye, unit_vector(vector));
 }
 
@@ -34,8 +31,6 @@ static t_point get_direction(t_camera cam, double x, double y)
 {
 	double	  p_x;
 	double	  p_y;
-
-	// printf("x %f , y %f \n", x, y);
 
 	p_x = ((2.0 * (x) / (double)WINDOW_WIDTH) - 1.0) * cam.w;
 	p_y = (1.0 - (2.0 * (y) / (double)WINDOW_HEIGHT) * cam.h);
@@ -63,19 +58,17 @@ static t_ray   make_ray_from_pixel(t_camera *cam, int x, int y)
 void	camera_render(t_main *data)
 {
 	t_ray		ray_cood;
-	t_camera	cam;
 	int			i;
 	int			j;
 
-	cam = make_camera(data->camera);
+	data->use_camera = make_camera(data->camera);
 	j = 0;
 	while (j < WINDOW_HEIGHT)
 	{
 		i = 0;
 		while (i < WINDOW_WIDTH)
 		{
-			// ray_cood = make_ray(cam, (2.0 * i / WINDOW_WIDTH) - 1.0, (-2.0 * j / WINDOW_HEIGHT) + 1.0);
-			ray_cood = make_ray_from_pixel(&cam, i, j);
+			ray_cood = make_ray_from_pixel(&(data->use_camera), i, j);
 			img_pix_put(&data->img, i, j, trace(data, ray_cood));
 			i++;
 		}

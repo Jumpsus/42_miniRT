@@ -17,6 +17,7 @@ void	rt_init(t_main *data, char *path)
 	data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,
 		&data->img.line, &data->img.endian);
 	data->background = (t_color){0, 0, 0};
+	data->use_camera = create_camera(data->camera);
 }
 
 #ifdef __linux__
@@ -46,27 +47,47 @@ int	rt_clear(t_main *data)
 
 int	rt_adjust_trans(int key, t_main *data){
 	if (key == K_UP) {
-		data->camera.pos = vector_add(data->camera.pos, data->use_camera.up);
+		data->use_camera.eye = vector_add(data->use_camera.eye, data->use_camera.up);
 	} else if (key == K_DOWN) {
-		data->camera.pos = vector_subtract(data->camera.pos, data->use_camera.up);
+		data->use_camera.eye = vector_subtract(data->use_camera.eye, data->use_camera.up);
 	} else if (key == K_RIGHT) {
-		data->camera.pos = vector_add(data->camera.pos, data->use_camera.right);
+		data->use_camera.eye = vector_add(data->use_camera.eye, data->use_camera.right);
 	} else if (key == K_LEFT) {
-		data->camera.pos = vector_subtract(data->camera.pos, data->use_camera.right);
+		data->use_camera.eye = vector_subtract(data->use_camera.eye, data->use_camera.right);
 	}
 	rt_render(data);
 	return (0);
 }
 
 int	rt_adjust_rots(int key, t_main *data){
+
 	if (key == K_W) {
-		data->camera.norm = unit_vector(vector_add(data->camera.norm, vector_multiply(data->use_camera.up, 0.1)));
+		data->use_camera.pitch = data->use_camera.pitch - (M_PI / 36.0);
 	} else if (key == K_S) {
-		data->camera.norm = unit_vector(vector_subtract(data->camera.norm, vector_multiply(data->use_camera.up, 0.1)));
+		data->use_camera.pitch = data->use_camera.pitch + (M_PI / 36.0);
 	} else if (key == K_A) {
-		data->camera.norm = unit_vector(vector_subtract(data->camera.norm, vector_multiply(data->use_camera.right, 0.1)));
+		data->use_camera.yaw = data->use_camera.yaw + (M_PI / 36.0);
 	} else if (key == K_D) {
-		data->camera.norm = unit_vector(vector_add(data->camera.norm, vector_multiply(data->use_camera.right, 0.1)));
+		data->use_camera.yaw = data->use_camera.yaw - (M_PI / 36.0);
+	}
+
+	rt_render(data);
+	return (0);
+}
+
+int	rt_adjust_zoom(int key, t_main *data){
+	if (key == K_X) {
+		if (data->use_camera.fov + 5.0 > 180.0){
+			data->use_camera.fov = 180;
+		} else {
+			data->use_camera.fov += 5.0;
+		}
+	} else if (key == K_Z) {
+		if (data->use_camera.fov - 5.0 < 0.0){
+			data->use_camera.fov = 0;
+		} else {
+			data->use_camera.fov -= 5.0;
+		}
 	}
 	rt_render(data);
 	return (0);
@@ -90,33 +111,11 @@ int	rt_key(int key, t_main *data)
 		rt_adjust_rots(key, data);
 	}
 
-	// else if (key == K_UP){
-	// 	printf("UP X:%f y:%f z:%f\n", data->use_camera.up.x, data->use_camera.up.y, data->use_camera.up.z);
-	// 	data->camera.norm.x = data->camera.norm.x + data->use_camera.up.x * 0.1;
-	// 	data->camera.norm.y = data->camera.norm.y + data->use_camera.up.y * 0.1;
-	// 	data->camera.norm.z = data->camera.norm.z + data->use_camera.up.z * 0.1;
-	// 	rt_render(data);
-	// }
-	// else if (key == K_DOWN){
-	// 	printf("DOWN X:%f y:%f z:%f\n", data->use_camera.up.x, data->use_camera.up.y, data->use_camera.up.z);
-	// 	data->camera.norm.x = data->camera.norm.x - data->use_camera.up.x * 0.1;
-	// 	data->camera.norm.y = data->camera.norm.y - data->use_camera.up.y * 0.1;
-	// 	data->camera.norm.z = data->camera.norm.z - data->use_camera.up.z * 0.1;
-	// 	rt_render(data);
-	// }
-	// else if (key == K_RIGHT){
-	// 	printf("RIGHT \n");
-	// 	data->camera.norm.x = data->camera.norm.x + data->use_camera.right.x * 0.1;
-	// 	data->camera.norm.y = data->camera.norm.y + data->use_camera.right.y * 0.1;
-	// 	data->camera.norm.z = data->camera.norm.z + data->use_camera.right.z * 0.1;
-	// 	rt_render(data);
-	// } else if (key == K_LEFT){
-	// 	printf("LEFT \n");
-	// 	data->camera.norm.x = data->camera.norm.x - data->use_camera.right.x * 0.1;
-	// 	data->camera.norm.y = data->camera.norm.y - data->use_camera.right.y * 0.1;
-	// 	data->camera.norm.z = data->camera.norm.z - data->use_camera.right.z * 0.1;
-	// 	rt_render(data);
-	// }
+	if (key == K_X || key == K_Z)
+	{
+		rt_adjust_zoom(key, data);
+	}
+
 	return (EXIT_SUCCESS);
 }
 

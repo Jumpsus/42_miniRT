@@ -83,6 +83,11 @@ typedef struct s_camera {
 	t_point			right;
 	double			h;
 	double			w;
+	double			aspect_ratio;
+	double			fov;
+	double			roll;	// for camera in rotation
+	double			pitch;	// for camera in rotation
+	double			yaw;	// for camera in rotation
 }	t_camera;
 
 typedef struct s_main {
@@ -166,6 +171,9 @@ double	solve_quadratic_minus(double a, double b, double c);
 double	solve_quadratic_plus(double a, double b, double c);
 t_hit	set_hit_property(double t, t_object *obj, t_ray r);
 t_hit	select_hit(t_hit a, t_hit b);
+
+/* camera */
+t_camera	create_camera(t_object camera);
 
 /* trace */
 t_color	trace(t_main *data, t_ray r);

@@ -1,22 +1,75 @@
 #include "mini_rt.h"
 
-static t_camera	make_camera(t_object camera)
+t_camera	create_camera(t_object camera)
 {
 	t_camera	cam;
-	double	  aspect_ratio;
-	t_point	 upguide;
 
-	upguide = create_vector(0.0, 1.0, 0.0);
-
-	aspect_ratio = WINDOW_WIDTH/WINDOW_HEIGHT;
 	cam.eye = camera.pos;
-	cam.forward = unit_vector(camera.norm);
-	cam.right = unit_vector(vector_cross(upguide, cam.forward));
-	cam.up = vector_cross(cam.forward, cam.right);
-	cam.h = tan(M_PI * 0.5 * camera.fov / 180);
-	cam.w = cam.h * aspect_ratio;
+	cam.aspect_ratio = WINDOW_WIDTH / WINDOW_HEIGHT;
+	cam.fov = camera.fov;
+	cam.roll = 0.0;
+	cam.pitch = asin(-1.0 * camera.norm.y);
+	cam.yaw = atan2(camera.norm.x, camera.norm.z);
 
 	return (cam);
+}
+// static t_camera	make_camera(t_object camera)
+// {
+// 	t_camera	cam;
+// 	double	  aspect_ratio;
+// 	t_point	 upguide;
+
+// 	upguide = create_vector(0.0, 1.0, 0.0);
+
+// 	aspect_ratio = WINDOW_WIDTH/WINDOW_HEIGHT;
+// 	cam.eye = camera.pos;
+// 	cam.forward = unit_vector(camera.norm);
+// 	cam.right = unit_vector(vector_cross(upguide, cam.forward));
+// 	cam.up = vector_cross(cam.forward, cam.right);
+// 	cam.h = tan(M_PI * 0.5 * camera.fov / 180);
+// 	cam.w = cam.h * aspect_ratio;
+
+// 	printf("FORWARD : %f %f %f\n", cam.forward.x, cam.forward.y, cam.forward.z);
+// 	printf("RIGHT : %f %f %f\n", cam.right.x, cam.right.y, cam.right.z);
+// 	printf("UP : %f %f %f\n", cam.up.x, cam.up.y, cam.up.z);
+
+// 	return (cam);
+// }
+
+static void	set_camera(t_camera *c)
+{
+	// t_camera	cam;
+	// double	  	aspect_ratio;
+	// double		pitch;
+	// double		yaw;
+	// double		roll;
+
+	// aspect_ratio = WINDOW_WIDTH / WINDOW_HEIGHT;
+	// cam.eye = camera.pos;
+	// roll = camera.roll;
+	// pitch = camera.pitch;
+	// yaw = camera.yaw;
+	// pitch = asin(-1.0 * camera.norm.y);
+	// yaw = atan2(camera.norm.x, camera.norm.z);
+
+    /* V1 */
+	// cam.right = create_vector(cos(pitch) * cos(roll), sin(yaw) * sin(pitch) * cos(roll) - cos(yaw) * sin(roll),  cos(yaw) * sin(pitch) * cos(roll) + sin(yaw) * sin(roll));
+	// cam.up = create_vector(cos(pitch) * sin(roll), sin(yaw) * sin(pitch) * sin(roll) + cos(yaw) * cos(roll), cos(yaw) * sin(pitch) * sin(roll) - sin(yaw) * cos(roll));
+	// cam.forward = create_vector(-1.0 * sin(pitch), sin(roll) * cos(pitch), cos(yaw) * cos(roll));
+	/* V2 */
+	c->right = create_vector(cos(c->yaw) * cos(c->roll), sin(c->pitch) * sin(c->yaw) * cos(c->roll) - cos(c->pitch) * sin(c->roll),  cos(c->pitch) * sin(c->yaw) * cos(c->roll) + sin(c->pitch) * sin(c->roll));
+	c->up = create_vector(cos(c->yaw) * sin(c->roll), sin(c->pitch) * sin(c->yaw) * sin(c->roll) + cos(c->pitch) * cos(c->roll), cos(c->pitch) * sin(c->yaw) * sin(c->roll) - sin(c->pitch) * cos(c->roll));
+	c->forward = create_vector(-1.0 * sin(c->yaw), sin(c->pitch) * cos(c->yaw), cos(c->pitch) * cos(c->yaw));
+	/* V3 */
+	// cam.right = create_vector(sin(pitch) * sin(yaw) * sin(roll) + cos(pitch) * cos(roll), sin(pitch) * sin(yaw) * cos(roll) - cos(pitch) * sin(roll), sin(pitch) * cos(yaw));
+	// cam.up = create_vector(cos(yaw) * sin(roll) , cos(yaw) * cos(roll), -1.0 * sin(yaw));
+	// cam.forward = create_vector(cos(pitch) * sin(yaw) * sin(roll) - sin(pitch) * cos(roll), cos(pitch) * sin(yaw) * cos(roll) + sin(pitch) * sin(roll), cos(pitch) * cos(yaw));
+
+	c->h = tan(M_PI * 0.5 * c->fov / 180);
+	c->w = c->h * c->aspect_ratio;
+
+
+	return ;
 }
 
 t_ray   make_ray(t_camera cam, double u, double v)
@@ -61,7 +114,7 @@ void	camera_render(t_main *data)
 	int			i;
 	int			j;
 
-	data->use_camera = make_camera(data->camera);
+	set_camera(&(data->use_camera));
 	j = 0;
 	while (j < WINDOW_HEIGHT)
 	{

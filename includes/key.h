@@ -12,6 +12,8 @@
 #  define K_A			97
 #  define K_S			115
 #  define K_D			100
+#  define K_Z			122
+#  define K_X			120
 
 # else
 
@@ -24,6 +26,8 @@
 #  define K_A			0
 #  define K_S			1
 #  define K_D			2
+#  define K_Z			6
+#  define K_X			7
 
 # endif
 

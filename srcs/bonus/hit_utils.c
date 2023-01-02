@@ -20,10 +20,26 @@ double	solve_quadratic_plus(double a, double b, double c)
 	return ((-b + sqrt(discriminant)) / (2 * a));
 }
 
+static t_point	set_norm_cy_co(double t, t_object *obj, t_ray r)
+{
+	t_point	pc;
+	t_point	hit_norm;
+
+	pc = vector_subtract(ray_at(r, t),
+		ray_at(create_ray(obj->pos, obj->norm), -obj->height / 2));
+	if (obj->id == CYLINDER)
+		hit_norm = vector_subtract(pc,
+			vector_multiply(obj->norm, vector_dot(obj->norm, pc)));
+	else
+		hit_norm = vector_subtract(pc,
+			vector_multiply(obj->norm, vector_dot(obj->norm, pc)
+			* (1 + pow(obj->radius / obj->height, 2))));
+	return (unit_vector(hit_norm));
+}
+
 t_hit	set_hit_property(double t, t_object *obj, t_ray r)
 {
 	t_hit	p;
-	t_point	pc;
 
 	p.t = t;
 	p.is_hit = (t >= 0);
@@ -35,23 +51,8 @@ t_hit	set_hit_property(double t, t_object *obj, t_ray r)
 		else if (obj->id == PLANE)
 			p.hit_norm = obj->norm;
 		// https://hugi.scene.org/online/hugi24/coding%20graphics%20chris%20dragan%20raytracing%20shapes.htm
-		else if (obj->id == CYLINDER)
-		{
-			pc = vector_subtract(ray_at(r, t),
-				ray_at(create_ray(obj->pos, obj->norm), -obj->height / 2));
-			p.hit_norm = vector_subtract(pc,
-				vector_multiply(obj->norm, vector_dot(obj->norm, pc)));
-			p.hit_norm = unit_vector(p.hit_norm);
-		}
-		else if (obj->id == CONE)
-		{
-			pc = vector_subtract(ray_at(r, t),
-				ray_at(create_ray(obj->pos, obj->norm), -obj->height / 2));
-			p.hit_norm = vector_subtract(pc,
-				vector_multiply(obj->norm, vector_dot(obj->norm, pc)
-				* (1 + pow(obj->radius / obj->height, 2))));
-			p.hit_norm = unit_vector(p.hit_norm);
-		}
+		else if (obj->id == CYLINDER || obj->id == CONE)
+			p.hit_norm = set_norm_cy_co(t, obj, r);
 	}
 	return (p);
 }

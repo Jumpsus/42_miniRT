@@ -13,6 +13,7 @@ t_camera	create_camera(t_object camera)
 
 	return (cam);
 }
+
 // static t_camera	make_camera(t_object camera)
 // {
 // 	t_camera	cam;
@@ -38,36 +39,12 @@ t_camera	create_camera(t_object camera)
 
 static void	set_camera(t_camera *c)
 {
-	// t_camera	cam;
-	// double	  	aspect_ratio;
-	// double		pitch;
-	// double		yaw;
-	// double		roll;
-
-	// aspect_ratio = WINDOW_WIDTH / WINDOW_HEIGHT;
-	// cam.eye = camera.pos;
-	// roll = camera.roll;
-	// pitch = camera.pitch;
-	// yaw = camera.yaw;
-	// pitch = asin(-1.0 * camera.norm.y);
-	// yaw = atan2(camera.norm.x, camera.norm.z);
-
-    /* V1 */
-	// cam.right = create_vector(cos(pitch) * cos(roll), sin(yaw) * sin(pitch) * cos(roll) - cos(yaw) * sin(roll),  cos(yaw) * sin(pitch) * cos(roll) + sin(yaw) * sin(roll));
-	// cam.up = create_vector(cos(pitch) * sin(roll), sin(yaw) * sin(pitch) * sin(roll) + cos(yaw) * cos(roll), cos(yaw) * sin(pitch) * sin(roll) - sin(yaw) * cos(roll));
-	// cam.forward = create_vector(-1.0 * sin(pitch), sin(roll) * cos(pitch), cos(yaw) * cos(roll));
-	/* V2 */
 	c->right = create_vector(cos(c->yaw) * cos(c->roll), sin(c->pitch) * sin(c->yaw) * cos(c->roll) - cos(c->pitch) * sin(c->roll),  cos(c->pitch) * sin(c->yaw) * cos(c->roll) + sin(c->pitch) * sin(c->roll));
 	c->up = create_vector(cos(c->yaw) * sin(c->roll), sin(c->pitch) * sin(c->yaw) * sin(c->roll) + cos(c->pitch) * cos(c->roll), cos(c->pitch) * sin(c->yaw) * sin(c->roll) - sin(c->pitch) * cos(c->roll));
 	c->forward = create_vector(-1.0 * sin(c->yaw), sin(c->pitch) * cos(c->yaw), cos(c->pitch) * cos(c->yaw));
-	/* V3 */
-	// cam.right = create_vector(sin(pitch) * sin(yaw) * sin(roll) + cos(pitch) * cos(roll), sin(pitch) * sin(yaw) * cos(roll) - cos(pitch) * sin(roll), sin(pitch) * cos(yaw));
-	// cam.up = create_vector(cos(yaw) * sin(roll) , cos(yaw) * cos(roll), -1.0 * sin(yaw));
-	// cam.forward = create_vector(cos(pitch) * sin(yaw) * sin(roll) - sin(pitch) * cos(roll), cos(pitch) * sin(yaw) * cos(roll) + sin(pitch) * sin(roll), cos(pitch) * cos(yaw));
-
+	
 	c->h = tan(M_PI * 0.5 * c->fov / 180);
 	c->w = c->h * c->aspect_ratio;
-
 
 	return ;
 }
@@ -91,7 +68,7 @@ static t_point get_direction(t_camera cam, double x, double y)
 	return create_vector(p_x, p_y, 1);
 }
 
-static t_ray   make_ray_from_pixel(t_camera *cam, int x, int y)
+t_ray   make_ray_from_pixel(t_camera *cam, int x, int y)
 {
 	t_point	origin;
 	t_point	direction;

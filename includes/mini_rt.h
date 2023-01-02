@@ -90,26 +90,44 @@ typedef struct s_camera {
 	double			yaw;	// for camera in rotation
 }	t_camera;
 
-typedef struct s_main {
-	void		*mlx_ptr;
-	void		*win_ptr;
-	t_img		img;
-	t_color		background;
-	t_object	ambient;
-	t_object	camera;
-	t_object	light;
-	t_camera	use_camera;
+typedef	struct	s_select_object{
 	t_object	*obj;
+	int			mode;
+}	t_select_object;
+
+typedef struct s_main {
+	void				*mlx_ptr;
+	void				*win_ptr;
+	t_img				img;
+	t_color				background;
+	t_object			ambient;
+	t_object			camera;
+	t_object			light;
+	t_camera			use_camera;
+	t_object			*obj;
+	t_select_object		select_obj;
 }	t_main;
 
 void	rt_init(t_main *data, char *path);
 int		rt_clear(t_main *data);
 int		rt_key(int key, t_main *data);
+int		rt_mouse(int key, int x, int y, t_main *data);
 int		rt_render(t_main *data);
-int		rt_re_render(t_main *data);
 
-void	camera_render(t_main *data);
-void	img_pix_put(t_img *img, int x, int y, t_color color);
+/* event */
+int		rt_adjust_zoom(int key, t_main *data);
+int		rt_adjust_rots(int key, t_main *data);
+int		rt_adjust_trans(int key, t_main *data);
+int		rt_set_obj_mode(int key, t_main *data);
+int		rt_scroll(int key, t_main *data);
+int		rt_adjust_object(int key, t_main *data);
+
+
+/* camera */
+t_camera	create_camera(t_object camera);
+t_ray		make_ray_from_pixel(t_camera *cam, int x, int y);
+void		camera_render(t_main *data);
+void		img_pix_put(t_img *img, int x, int y, t_color color);
 
 t_point     create_vector(double x, double y, double z);
 t_point		vector_add(t_point a, t_point b);
@@ -171,9 +189,6 @@ double	solve_quadratic_minus(double a, double b, double c);
 double	solve_quadratic_plus(double a, double b, double c);
 t_hit	set_hit_property(double t, t_object *obj, t_ray r);
 t_hit	select_hit(t_hit a, t_hit b);
-
-/* camera */
-t_camera	create_camera(t_object camera);
 
 /* trace */
 t_color	trace(t_main *data, t_ray r);

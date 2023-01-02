@@ -18,6 +18,8 @@ void	rt_init(t_main *data, char *path)
 		&data->img.line, &data->img.endian);
 	data->background = (t_color){0, 0, 0};
 	data->use_camera = create_camera(data->camera);
+	data->select_obj.obj = 0;
+	data->select_obj.mode = 0;
 }
 
 #ifdef __linux__
@@ -45,50 +47,29 @@ int	rt_clear(t_main *data)
 
 #endif
 
-int	rt_adjust_trans(int key, t_main *data){
-	if (key == K_UP) {
-		data->use_camera.eye = vector_add(data->use_camera.eye, data->use_camera.up);
-	} else if (key == K_DOWN) {
-		data->use_camera.eye = vector_subtract(data->use_camera.eye, data->use_camera.up);
-	} else if (key == K_RIGHT) {
-		data->use_camera.eye = vector_add(data->use_camera.eye, data->use_camera.right);
-	} else if (key == K_LEFT) {
-		data->use_camera.eye = vector_subtract(data->use_camera.eye, data->use_camera.right);
-	}
-	rt_render(data);
-	return (0);
-}
 
-int	rt_adjust_rots(int key, t_main *data){
+int	rt_mouse(int key, int x, int y, t_main *data)
+{	
+	t_hit	hit;
+	t_ray	ray;
+	
+	ray = make_ray_from_pixel(&(data->use_camera), x, y);
+	if (key == M_LEFT) {
+		hit = hit_object(data, ray);
+		if (hit.is_hit)
+			data->select_obj.obj = hit.hit_obj;
+		// printf("selected object = %p", data->select_obj.obj);
 
-	if (key == K_W) {
-		data->use_camera.pitch = data->use_camera.pitch - (M_PI / 36.0);
-	} else if (key == K_S) {
-		data->use_camera.pitch = data->use_camera.pitch + (M_PI / 36.0);
-	} else if (key == K_A) {
-		data->use_camera.yaw = data->use_camera.yaw + (M_PI / 36.0);
-	} else if (key == K_D) {
-		data->use_camera.yaw = data->use_camera.yaw - (M_PI / 36.0);
+	} else if (key == M_RIGHT) {
+		data->select_obj.obj = 0; // unselect object
+		data->select_obj.mode = 0; //unset mode
+		// printf("unselected selected %p", data->select_obj.obj);
+
+	} else if (key == M_UP || key == M_DOWN) {
+		rt_scroll(key, data); // zoom in and out OR move obj fw and bw
 	}
 
-	rt_render(data);
-	return (0);
-}
-
-int	rt_adjust_zoom(int key, t_main *data){
-	if (key == K_X) {
-		if (data->use_camera.fov + 5.0 > 180.0){
-			data->use_camera.fov = 180;
-		} else {
-			data->use_camera.fov += 5.0;
-		}
-	} else if (key == K_Z) {
-		if (data->use_camera.fov - 5.0 < 0.0){
-			data->use_camera.fov = 0;
-		} else {
-			data->use_camera.fov -= 5.0;
-		}
-	}
+	printf("key : %d\n", key);
 	rt_render(data);
 	return (0);
 }
@@ -100,21 +81,24 @@ int	rt_key(int key, t_main *data)
 		printf("EXIT\n");
 		rt_clear(data);
 	}
-
 	if (key == K_UP || key == K_DOWN || key == K_LEFT || key == K_RIGHT)
-	{
 		rt_adjust_trans(key, data);
-	}
-
 	if (key == K_A || key == K_W || key == K_S || key == K_D)
-	{
 		rt_adjust_rots(key, data);
-	}
+	if (key == K_H || key == K_X || key == K_Y || key == K_Z || key == K_R)
+		rt_set_obj_mode(key, data);// rt_adjust_zoom(key, data);
+	if (key == K_LESS || key == K_MORE)
+		rt_adjust_object(key, data);
 
-	if (key == K_X || key == K_Z)
-	{
-		rt_adjust_zoom(key, data);
-	}
+	printf("key : %d\n", key);
+
+	return (EXIT_SUCCESS);
+}
+
+int	rt_hi(int key, int x, int y, t_main *data)
+{
+
+	printf("key : %d %d %d %f\n", key, x, y, data->obj->norm.x);
 
 	return (EXIT_SUCCESS);
 }
@@ -142,6 +126,7 @@ int	main(int argc, char **argv)
 
 	mlx_hook(data.win_ptr, 17, 1L << 17, &rt_clear, &data);
 	mlx_hook(data.win_ptr, 2, 1L << 0, &rt_key, &data);
+	mlx_mouse_hook(data.win_ptr, &rt_mouse, &data);
 	mlx_loop_hook(data.mlx_ptr, &rt_render, &data);
 	mlx_loop(data.mlx_ptr);
 }

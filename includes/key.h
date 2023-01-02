@@ -12,8 +12,13 @@
 #  define K_A			97
 #  define K_S			115
 #  define K_D			100
+#  define K_R			114
+#  define K_H			104
 #  define K_Z			122
+#  define K_Y			121
 #  define K_X			120
+#  define K_LESS        44
+#  define K_MORE        46
 
 # else
 
@@ -26,9 +31,19 @@
 #  define K_A			0
 #  define K_S			1
 #  define K_D			2
+#  define K_R			15
+#  define K_H			4
 #  define K_Z			6
+#  define K_Y			16
 #  define K_X			7
+#  define K_LESS        43
+#  define K_MORE        47
 
 # endif
+
+#  define M_UP			4
+#  define M_LEFT		1
+#  define M_DOWN		5
+#  define M_RIGHT		3
 
 #endif

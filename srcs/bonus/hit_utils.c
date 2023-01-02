@@ -38,9 +38,18 @@ t_hit	set_hit_property(double t, t_object *obj, t_ray r)
 		else if (obj->id == CYLINDER)
 		{
 			pc = vector_subtract(ray_at(r, t),
-				ray_at(create_ray(obj->pos, obj->norm), -obj->height /2));
+				ray_at(create_ray(obj->pos, obj->norm), -obj->height / 2));
 			p.hit_norm = vector_subtract(pc,
 				vector_multiply(obj->norm, vector_dot(obj->norm, pc)));
+			p.hit_norm = unit_vector(p.hit_norm);
+		}
+		else if (obj->id == CONE)
+		{
+			pc = vector_subtract(ray_at(r, t),
+				ray_at(create_ray(obj->pos, obj->norm), -obj->height / 2));
+			p.hit_norm = vector_subtract(pc,
+				vector_multiply(obj->norm, vector_dot(obj->norm, pc)
+				* (1 + pow(obj->radius / obj->height, 2))));
 			p.hit_norm = unit_vector(p.hit_norm);
 		}
 	}

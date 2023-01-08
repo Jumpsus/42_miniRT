@@ -2,17 +2,29 @@
 
 int	rt_adjust_trans(int key, t_main *data){
 	if (key == K_UP) {
-		data->use_camera.eye = vector_add(data->use_camera.eye, data->use_camera.up);
+		if (data->select_obj.obj)
+			data->select_obj.obj->pos = vector_add(data->select_obj.obj->pos, data->use_camera.up);
+		else
+			data->use_camera.eye = vector_add(data->use_camera.eye, data->use_camera.up);
 	} else if (key == K_DOWN) {
-		data->use_camera.eye = vector_subtract(data->use_camera.eye, data->use_camera.up);
+		if (data->select_obj.obj)
+			data->select_obj.obj->pos = vector_subtract(data->select_obj.obj->pos, data->use_camera.up);
+		else
+			data->use_camera.eye = vector_subtract(data->use_camera.eye, data->use_camera.up);
 	} else if (key == K_RIGHT) {
-		data->use_camera.eye = vector_add(data->use_camera.eye, data->use_camera.right);
+		if (data->select_obj.obj)
+			data->select_obj.obj->pos = vector_add(data->select_obj.obj->pos, data->use_camera.right);
+		else
+			data->use_camera.eye = vector_add(data->use_camera.eye, data->use_camera.right);
 	} else if (key == K_LEFT) {
-		data->use_camera.eye = vector_subtract(data->use_camera.eye, data->use_camera.right);
-	} else if (key == K_LESS){
-		data->use_camera.eye = vector_subtract(data->use_camera.eye, data->use_camera.forward);
-	} else if (key == K_MORE){
-		data->use_camera.eye = vector_add(data->use_camera.eye, data->use_camera.forward);
+		if (data->select_obj.obj)
+			data->select_obj.obj->pos = vector_subtract(data->select_obj.obj->pos, data->use_camera.right);
+		else
+			data->use_camera.eye = vector_subtract(data->use_camera.eye, data->use_camera.right);
+	// } else if (key == K_LESS){
+	// 	data->use_camera.eye = vector_subtract(data->use_camera.eye, data->use_camera.forward);
+	// } else if (key == K_MORE){
+	// 	data->use_camera.eye = vector_add(data->use_camera.eye, data->use_camera.forward);
 	}
 
 	rt_render(data);

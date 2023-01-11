@@ -1,22 +1,27 @@
-#include "mini_rt.h"
+#include "mini_rt_bonus.h"
 
-int	rt_adjust_trans(int key, t_main *data){
-	if (key == K_UP) {
+int	rt_adjust_trans(int key, t_main *data)
+{
+	if (key == K_UP)
+	{
 		if (data->select_obj.obj)
 			data->select_obj.obj->pos = vector_add(data->select_obj.obj->pos, data->use_camera.up);
 		else
 			data->use_camera.eye = vector_add(data->use_camera.eye, data->use_camera.up);
-	} else if (key == K_DOWN) {
+	} else if (key == K_DOWN)
+	{
 		if (data->select_obj.obj)
 			data->select_obj.obj->pos = vector_subtract(data->select_obj.obj->pos, data->use_camera.up);
 		else
 			data->use_camera.eye = vector_subtract(data->use_camera.eye, data->use_camera.up);
-	} else if (key == K_RIGHT) {
+	} else if (key == K_RIGHT)
+	{
 		if (data->select_obj.obj)
 			data->select_obj.obj->pos = vector_add(data->select_obj.obj->pos, data->use_camera.right);
 		else
 			data->use_camera.eye = vector_add(data->use_camera.eye, data->use_camera.right);
-	} else if (key == K_LEFT) {
+	} else if (key == K_LEFT)
+	{
 		if (data->select_obj.obj)
 			data->select_obj.obj->pos = vector_subtract(data->select_obj.obj->pos, data->use_camera.right);
 		else
@@ -33,13 +38,19 @@ int	rt_adjust_trans(int key, t_main *data){
 
 int	rt_adjust_rots(int key, t_main *data){
 
-	if (key == K_W) {
+	if (key == K_W)
+	{
 		data->use_camera.pitch = data->use_camera.pitch - (M_PI / 36.0);
-	} else if (key == K_S) {
+	}
+	else if (key == K_S)
+	{
 		data->use_camera.pitch = data->use_camera.pitch + (M_PI / 36.0);
-	} else if (key == K_A) {
+	}
+	else if (key == K_A)
+	{
 		data->use_camera.yaw = data->use_camera.yaw + (M_PI / 36.0);
-	} else if (key == K_D) {
+	}
+	else if (key == K_D) {
 		data->use_camera.yaw = data->use_camera.yaw - (M_PI / 36.0);
 	}
 

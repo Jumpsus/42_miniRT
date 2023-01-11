@@ -1,6 +1,6 @@
-#include "mini_rt.h"
+#include "mini_rt_bonus.h"
 
-t_hit	hit_cylinder_cap(t_object *cy, t_ray r)
+static t_hit	hit_cylinder_cap(t_object *cy, t_ray r)
 {
 	t_ray		cy_ray;
 	t_object	pl[2];
@@ -28,7 +28,7 @@ t_hit	hit_cylinder_cap(t_object *cy, t_ray r)
 	return (set_hit_property(-DBL_MAX, cy, r));
 }
 
-t_hit	hit_cylinder_surface_2(t_object *cy, t_ray r, t_hit hit[2])
+static t_hit	hit_cylinder_surface_2(t_object *cy, t_ray r, t_hit hit[2])
 {
 	t_ray	cy_ray;
 	t_point	p[2];
@@ -55,7 +55,31 @@ t_hit	hit_cylinder_surface_2(t_object *cy, t_ray r, t_hit hit[2])
 	return (set_hit_property(-DBL_MAX, cy, r));
 }
 
-t_hit	hit_cylinder_surface(t_object *cy, t_ray r)
+// static t_hit	hit_cylinder_surface(t_object *cy, t_ray r)
+// {
+// 	t_hit	hit[2];
+// 	t_point	x;
+// 	double	a;
+// 	double	b;
+// 	double	c;
+
+// 	x = vector_subtract(r.orig,
+// 		ray_at(create_ray(cy->pos, cy->norm), -cy->height / 2));
+// 	a = vector_square_length(vector_subtract(r.dir,
+// 		vector_multiply(cy->norm, vector_dot(r.dir, cy->norm))));
+// 	b = 2 * vector_dot(vector_subtract(r.dir,
+// 		vector_multiply(cy->norm, vector_dot(r.dir, cy->norm))),
+// 		vector_subtract(x, vector_multiply(cy->norm, vector_dot(x, cy->norm))));
+// 	c = vector_square_length(vector_subtract(x,
+// 		vector_multiply(cy->norm, vector_dot(x, cy->norm))))
+// 		- pow(cy->radius, 2);
+// 	hit[0] = set_hit_property(solve_quadratic_minus(a, b, c), cy, r);
+// 	hit[1] = set_hit_property(solve_quadratic_plus(a, b, c), cy, r);
+// 	return (hit_cylinder_surface_2(cy, r, hit));
+// }
+
+// https://hugi.scene.org/online/hugi24/coding%20graphics%20chris%20dragan%20raytracing%20shapes.htm
+static t_hit	hit_cylinder_surface(t_object *cy, t_ray r)
 {
 	t_hit	hit[2];
 	t_point	x;
@@ -63,46 +87,20 @@ t_hit	hit_cylinder_surface(t_object *cy, t_ray r)
 	double	b;
 	double	c;
 
-	x = vector_subtract(r.orig,
-		ray_at(create_ray(cy->pos, cy->norm), -cy->height / 2));
-	a = vector_square_length(vector_subtract(r.dir,
-		vector_multiply(cy->norm, vector_dot(r.dir, cy->norm))));
-	b = 2 * vector_dot(vector_subtract(r.dir,
-		vector_multiply(cy->norm, vector_dot(r.dir, cy->norm))),
-		vector_subtract(x, vector_multiply(cy->norm, vector_dot(x, cy->norm))));
-	c = vector_square_length(vector_subtract(x,
-		vector_multiply(cy->norm, vector_dot(x, cy->norm))))
+	x = vector_subtract(r.orig, ray_at(
+		create_ray(cy->pos, cy->norm), -cy->height / 2));
+	a = vector_square_length(r.dir)
+		- pow(vector_dot(r.dir, cy->norm), 2);
+	b = 2 * (vector_dot(r.dir, x)
+		- vector_dot(r.dir, cy->norm)
+		* vector_dot(x, cy->norm));
+	c = vector_square_length(x)
+		- pow(vector_dot(x, cy->norm), 2)
 		- pow(cy->radius, 2);
 	hit[0] = set_hit_property(solve_quadratic_minus(a, b, c), cy, r);
 	hit[1] = set_hit_property(solve_quadratic_plus(a, b, c), cy, r);
 	return (hit_cylinder_surface_2(cy, r, hit));
 }
-
-// t_hit	hit_cylinder_surface(t_object cy, t_ray r)
-// {
-// 	t_ray	cy_ray;
-// 	t_hit	hit[2];
-// 	t_point	x;
-// 	double	dv;
-// 	double	xv;
-
-// 	cy_ray = create_ray(cy.pos, cy.norm);
-// 	x = vector_subtract(r.orig,
-// 		ray_at(cy_ray, -cy.height / 2));
-// 	dv = vector_dot(r.dir, cy.norm);
-// 	xv = vector_dot(x, cy.norm);
- 
-// 	hit[0] = set_hit_property(solve_quadratic_minus(
-// 		vector_square_length(r.dir) - pow(dv, 2),
-// 		2 * (vector_dot(r.dir, x) - dv * xv),
-// 		vector_square_length(x) - pow(xv, 2) - pow(cy.radius, 2)), cy, r);
-
-// 	hit[1] = set_hit_property(solve_quadratic_plus(
-// 		vector_square_length(r.dir) - pow(dv, 2),
-// 		2 * (vector_dot(r.dir, x) - dv * xv),
-// 		vector_square_length(x) - pow(xv, 2) - pow(cy.radius, 2)), cy, r);
-// 	return (hit_cylinder_surface_2(cy, r, hit));
-// }
 
 // https://mrl.cs.nyu.edu/~dzorin/rendering/lectures/lecture3/lecture3.pdf
 t_hit	hit_cylinder(t_object *cy, t_ray r)

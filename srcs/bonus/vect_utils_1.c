@@ -1,4 +1,4 @@
-# include "vector.h"
+#include "vector.h"
 
 t_point	create_vector(double x, double y, double z)
 {
@@ -41,6 +41,6 @@ t_point	vector_multiply(t_point a, double multiplier)
 }
 
 t_point	vector_divide(t_point a, double divisor)
-{   
+{
 	return (vector_multiply(a, (1 / divisor)));
 }

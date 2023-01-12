@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   init.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 17:47:22 by prrattan          #+#    #+#             */
+/*   Updated: 2023/01/12 17:47:38 by prrattan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini_rt_bonus.h"
 
 static void	obj_set_defalt(t_object *obj)
@@ -22,7 +34,7 @@ void	rt_init(t_main *data, char *path)
 	scene_read(data, path);
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr,
-			WINDOW_WIDTH, WINDOW_HEIGHT, "miniRT");
+			WINDOW_WIDTH, WINDOW_HEIGHT, "miniRT bonus");
 	data->img.img_ptr = mlx_new_image(data->mlx_ptr,
 			WINDOW_WIDTH, WINDOW_HEIGHT);
 	data->img.addr = mlx_get_data_addr(data->img.img_ptr, &data->img.bpp,

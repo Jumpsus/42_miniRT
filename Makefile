@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: prrattan <marvin@42.fr>                    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2023/01/12 17:43:45 by prrattan          #+#    #+#              #
+#    Updated: 2023/01/12 17:43:59 by prrattan         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = miniRT
 
 SRC_DIR = srcs/
@@ -72,7 +84,7 @@ endif
 norm:
 	$(foreach f, $(filter-out $(MLX), $(LIB_DIR)), make norm -C $f;)
 	@$(NORM) -R CheckForbiddenSourceHeader $(SRC_DIR) | grep -v Norme -B1 || true
-	@$(NORM) -R CheckDefine $(HDRS) | grep -v Norme -B1 || true
+	@$(NORM) -R CheckDefine $(HDR_DIR) | grep -v Norme -B1 || true
 
 clean:
 	$(RM) -rf $(OBJ_DIR)

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit_utils.c                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 12:58:57 by prrattan          #+#    #+#             */
+/*   Updated: 2023/01/12 12:58:58 by prrattan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini_rt_bonus.h"
 
 double	solve_quadratic_minus(double a, double b, double c)
@@ -26,18 +38,21 @@ static t_point	set_norm_cy_co(double t, t_object *obj, t_ray r)
 	t_point	hit_norm;
 
 	pc = vector_subtract(ray_at(r, t),
-		ray_at(create_ray(obj->pos, obj->norm), -obj->height / 2));
+			ray_at(create_ray(obj->pos, obj->norm), -obj->height / 2));
 	if (obj->id == CYLINDER)
 		hit_norm = vector_subtract(pc,
-			vector_multiply(obj->norm, vector_dot(obj->norm, pc)));
+				vector_multiply(obj->norm, vector_dot(obj->norm, pc)));
 	else
 		hit_norm = vector_subtract(pc,
-			vector_multiply(obj->norm, vector_dot(obj->norm, pc)
-			* (1 + pow(obj->radius / obj->height, 2))));
+				vector_multiply(obj->norm, vector_dot(obj->norm, pc)
+					* (1 + pow(obj->radius / obj->height, 2))));
 	return (unit_vector(hit_norm));
 }
 
-// https://hugi.scene.org/online/hugi24/coding%20graphics%20chris%20dragan%20raytracing%20shapes.htm	
+/*
+https://hugi.scene.org/online/hugi24/coding%20graphics
+%20chris%20dragan%20raytracing%20shapes.htm	
+*/
 t_hit	set_hit_property(double t, t_object *obj, t_ray r)
 {
 	t_hit	p;
@@ -62,13 +77,13 @@ t_hit	select_hit(t_hit a, t_hit b)
 	if (a.is_hit && b.is_hit)
 	{
 		if (a.t < b.t)
-			return a;
-		return b;
+			return (a);
+		return (b);
 	}
 	if (a.is_hit)
-		return a;
+		return (a);
 	if (b.is_hit)
-		return b;
+		return (b);
 	a.is_hit = 0;
-	return a;
+	return (a);
 }

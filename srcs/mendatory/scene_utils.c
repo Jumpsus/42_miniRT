@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene_utils.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 10:48:16 by prrattan          #+#    #+#             */
+/*   Updated: 2023/01/12 10:48:17 by prrattan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini_rt.h"
 
 t_object	*init_obj(t_object **obj)
@@ -25,7 +37,8 @@ void	scene_clear(t_main *data)
 	}
 }
 
-static void	drop_front_space(char *str) {
+static void	drop_front_space(char *str)
+{
 	int	pos;
 	int	len;
 
@@ -38,30 +51,33 @@ static void	drop_front_space(char *str) {
 	str[len] = 0;
 }
 
-static void	drop_comma_space(char *str) {
+static void	drop_comma_space(char *str)
+{
 	int	pos;
 
 	pos = 0;
 	while (str[++pos])
-    {
-        if (str[pos - 1] == ',' && ft_isspace(str[pos]))
-            drop_front_space(str + pos--);
-        else if (str[pos] == ',' && ft_isspace(str[pos - 1]))
-            drop_front_space(str + --pos);
-    }
+	{
+		if (str[pos - 1] == ',' && ft_isspace(str[pos]))
+			drop_front_space(str + pos--);
+		else if (str[pos] == ',' && ft_isspace(str[pos - 1]))
+			drop_front_space(str + --pos);
+	}
 }
 
-void	standardize_columns(char **addr, char *str) {
+void	standardize_columns(char **addr, char *str)
+{
 	int	pos;
 
-	drop_front_space(str); // removes spaces in front
+	drop_front_space(str);
 	pos = -1;
 	while (str[++pos])
 		if (ft_isspace(str[pos]))
 			break ;
-	if (str[pos]) { // leave a space to seperate columns
+	if (str[pos])
+	{
 		str[pos] = ' ';
 		return (standardize_columns(addr, str + pos + 1));
 	}
-    drop_comma_space(*addr); // removes spaces before and after comma
+	drop_comma_space(*addr);
 }

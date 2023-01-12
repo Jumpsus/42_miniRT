@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   render_utils.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 10:41:09 by prrattan          #+#    #+#             */
+/*   Updated: 2023/01/12 10:41:28 by prrattan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini_rt_bonus.h"
 
 void	img_pix_put(t_img *img, int x, int y, t_color color)
@@ -31,14 +43,18 @@ void	img_pix_put(t_img *img, int x, int y, t_color color)
 */
 void	rotate_object(t_object *obj, double x_rot, double y_rot, double z_rot)
 {
-	t_point result;
+	t_point	result;
 
 	result.x = obj->norm.x * (cos(y_rot) * cos(z_rot))
-		+ obj->norm.y * (sin(x_rot) * sin(y_rot) * cos(z_rot) - cos(x_rot) * sin(y_rot))
-		+ obj->norm.z * (cos(x_rot) * sin(y_rot) * cos(z_rot) + sin(x_rot) * sin(y_rot));
+		+ obj->norm.y * (sin(x_rot) * sin(y_rot)
+			* cos(z_rot) - cos(x_rot) * sin(y_rot))
+		+ obj->norm.z * (cos(x_rot) * sin(y_rot)
+			* cos(z_rot) + sin(x_rot) * sin(y_rot));
 	result.y = obj->norm.x * (cos(y_rot) * sin(z_rot))
-		+ obj->norm.y * (sin(x_rot) * sin(y_rot) * sin(z_rot) + cos(x_rot) * cos(y_rot))
-		+ obj->norm.z * (cos(x_rot) * sin(y_rot) * sin(z_rot) - sin(x_rot) * cos(y_rot));
+		+ obj->norm.y * (sin(x_rot) * sin(y_rot)
+			* sin(z_rot) + cos(x_rot) * cos(y_rot))
+		+ obj->norm.z * (cos(x_rot) * sin(y_rot)
+			* sin(z_rot) - sin(x_rot) * cos(y_rot));
 	result.z = obj->norm.x * (-sin(y_rot))
 		+ obj->norm.y * (sin(x_rot) * cos(y_rot))
 		+ obj->norm.z * (cos(x_rot) * cos(y_rot));

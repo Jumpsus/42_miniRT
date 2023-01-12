@@ -1,6 +1,21 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit_sphere.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 12:52:42 by prrattan          #+#    #+#             */
+/*   Updated: 2023/01/12 12:52:43 by prrattan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini_rt.h"
 
-// source: https://www.cl.cam.ac.uk/teaching/1999/AGraphHCI/SMAG/node2.html#eqn:rectcylrayquad
+/*
+source: https://www.cl.cam.ac.uk/teaching/1999/
+AGraphHCI/SMAG/node2.html#eqn:rectcylrayquad
+*/
 t_hit	hit_sphere(t_object *sp, t_ray r)
 {
 	t_hit	hit[2];

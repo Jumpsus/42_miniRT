@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit.c                                              :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 10:37:24 by prrattan          #+#    #+#             */
+/*   Updated: 2023/01/12 10:37:25 by prrattan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini_rt.h"
 
 static t_hit	get_hit(t_object *cur, t_ray ray)
@@ -13,7 +25,10 @@ static t_hit	get_hit(t_object *cur, t_ray ray)
 	return (hit);
 }
 
-// page-38 https://www.cs.cornell.edu/courses/cs4620/2014fa/lectures/04rt-intersect.pdf
+/*
+page-38 https://www.cs.cornell.edu/courses/
+cs4620/2014fa/lectures/04rt-intersect.pdf
+*/
 t_hit	hit_object(t_main *data, t_ray ray)
 {
 	t_object	*cur;

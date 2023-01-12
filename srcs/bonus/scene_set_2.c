@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene_set_2.c                                      :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 13:00:41 by prrattan          #+#    #+#             */
+/*   Updated: 2023/01/12 13:00:53 by prrattan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini_rt_bonus.h"
 
 int	scene_set_plane(t_object *obj, char *s)
@@ -63,4 +75,3 @@ vector, diameter, height and rgb colors", STDERR_FILENO);
 	free_2d(inp);
 	return (obj->id);
 }
-

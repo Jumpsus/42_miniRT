@@ -1,4 +1,16 @@
-#include "mini_rt_bonus.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   hit_cylinder.c                                     :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 12:50:51 by prrattan          #+#    #+#             */
+/*   Updated: 2023/01/12 12:51:42 by prrattan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "mini_rt.h"
 
 static t_hit	hit_cylinder_cap(t_object *cy, t_ray r)
 {
@@ -19,7 +31,8 @@ static t_hit	hit_cylinder_cap(t_object *cy, t_ray r)
 		hit[i] = hit_plane(pl + i, r);
 		if (hit[i].is_hit)
 			if (!(vector_square_length(vector_subtract(
-				ray_at(r, hit[i].t), pl[i].pos)) < pow(cy->radius, 2)))
+							ray_at(r, hit[i].t), pl[i].pos))
+					< pow(cy->radius, 2)))
 				hit[i].is_hit = 0;
 	}
 	hit[0] = select_hit(hit[0], hit[1]);
@@ -44,8 +57,8 @@ static t_hit	hit_cylinder_surface_2(t_object *cy, t_ray r, t_hit hit[2])
 		if (hit[i].is_hit)
 		{
 			q = ray_at(r, hit[i].t);
-			if (!(vector_dot(cy->norm, vector_subtract(q, p[0])) > 0 &&
-				vector_dot(cy->norm, vector_subtract(q, p[1])) < 0))
+			if (!(vector_dot(cy->norm, vector_subtract(q, p[0])) > 0
+					&& vector_dot(cy->norm, vector_subtract(q, p[1])) < 0))
 				hit[i].is_hit = 0;
 		}
 	}
@@ -55,7 +68,10 @@ static t_hit	hit_cylinder_surface_2(t_object *cy, t_ray r, t_hit hit[2])
 	return (set_hit_property(-DBL_MAX, cy, r));
 }
 
-// https://hugi.scene.org/online/hugi24/coding%20graphics%20chris%20dragan%20raytracing%20shapes.htm
+/*
+https://hugi.scene.org/online/hugi24/coding%20graphics
+%20chris%20dragan%20raytracing%20shapes.htm
+*/
 static t_hit	hit_cylinder_surface(t_object *cy, t_ray r)
 {
 	t_hit	hit[2];
@@ -65,12 +81,12 @@ static t_hit	hit_cylinder_surface(t_object *cy, t_ray r)
 	double	c;
 
 	x = vector_subtract(r.orig, ray_at(
-		create_ray(cy->pos, cy->norm), -cy->height / 2));
+				create_ray(cy->pos, cy->norm), -cy->height / 2));
 	a = vector_square_length(r.dir)
 		- pow(vector_dot(r.dir, cy->norm), 2);
 	b = 2 * (vector_dot(r.dir, x)
-		- vector_dot(r.dir, cy->norm)
-		* vector_dot(x, cy->norm));
+			- vector_dot(r.dir, cy->norm)
+			* vector_dot(x, cy->norm));
 	c = vector_square_length(x)
 		- pow(vector_dot(x, cy->norm), 2)
 		- pow(cy->radius, 2);
@@ -79,7 +95,9 @@ static t_hit	hit_cylinder_surface(t_object *cy, t_ray r)
 	return (hit_cylinder_surface_2(cy, r, hit));
 }
 
-// https://mrl.cs.nyu.edu/~dzorin/rendering/lectures/lecture3/lecture3.pdf
+/*
+https://mrl.cs.nyu.edu/~dzorin/rendering/lectures/lecture3/lecture3.pdf
+*/
 t_hit	hit_cylinder(t_object *cy, t_ray r)
 {
 	t_hit	hits;

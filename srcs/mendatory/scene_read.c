@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   scene_read.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/01/12 10:43:44 by prrattan          #+#    #+#             */
+/*   Updated: 2023/01/12 10:43:45 by prrattan         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "mini_rt.h"
 
 static int	scene_open(char *path)
@@ -6,7 +18,8 @@ static int	scene_open(char *path)
 	char	*s;
 
 	fd = open(path, O_RDONLY);
-	if (fd < 0) {
+	if (fd < 0)
+	{
 		perror("Error\n");
 		exit(EXIT_FAILURE);
 	}

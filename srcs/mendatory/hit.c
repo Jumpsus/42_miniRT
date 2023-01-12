@@ -6,7 +6,7 @@
 /*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/12 10:37:24 by prrattan          #+#    #+#             */
-/*   Updated: 2023/01/12 10:37:25 by prrattan         ###   ########.fr       */
+/*   Updated: 2023/01/12 13:09:16 by prrattan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ static t_hit	get_hit(t_object *cur, t_ray ray)
 		hit = hit_sphere(cur, ray);
 	else if (cur->id == PLANE)
 		hit = hit_plane(cur, ray);
-	else if (cur->id == CYLINDER)
+	else
 		hit = hit_cylinder(cur, ray);
 	return (hit);
 }

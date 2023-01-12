@@ -6,7 +6,7 @@
 /*   By: prrattan <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/16 16:12:51 by prrattan          #+#    #+#             */
-/*   Updated: 2022/07/19 15:07:03 by prrattan         ###   ########.fr       */
+/*   Updated: 2023/01/12 13:11:48 by prrattan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ static double	ft_atof_float(const char *nptr)
 		{
 			if (!ft_isdigit(nptr[i]))
 				break ;
-			result = (nptr[i]  - '0') + result * 10;
+			result = (nptr[i] - '0') + result * 10;
 			e--;
 		}
 	}

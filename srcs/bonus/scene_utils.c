@@ -12,31 +12,6 @@
 
 #include "mini_rt_bonus.h"
 
-t_object	*init_obj(t_object **obj)
-{
-	if (!*obj)
-	{
-		*obj = malloc(sizeof(**obj));
-		scene_set_defalt(*obj);
-		return (*obj);
-	}
-	return (init_obj(&(*obj)->next));
-}
-
-void	scene_clear(t_main *data)
-{
-	t_object	*cur;
-	t_object	*next;
-
-	cur = data->obj;
-	while (cur)
-	{
-		next = cur->next;
-		free(cur);
-		cur = next;
-	}
-}
-
 static void	drop_front_space(char *str)
 {
 	int	pos;

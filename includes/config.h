@@ -1,5 +1,18 @@
-#ifndef KEY_H
-# define KEY_H
+#ifndef CONFIG_H
+# define CONFIG_H
+
+# define WINDOW_WIDTH	1200
+# define WINDOW_HEIGHT	600
+
+# define SHININESS	100
+
+# define AMBIENT	1
+# define CAMERA		2
+# define LIGHT		3
+# define SPHERE		4
+# define PLANE		5
+# define CYLINDER	6
+# define CONE		7
 
 # ifdef __linux__
 

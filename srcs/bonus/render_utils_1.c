@@ -1,18 +1,5 @@
 #include "mini_rt_bonus.h"
 
-t_camera	create_camera(t_object camera)
-{
-	t_camera	cam;
-
-	cam.eye = camera.pos;
-	cam.aspect_ratio = WINDOW_WIDTH / WINDOW_HEIGHT;
-	cam.fov = camera.fov;
-	cam.roll = 0.0;
-	cam.pitch = asin(-1.0 * camera.norm.y);
-	cam.yaw = atan2(camera.norm.x, camera.norm.z);
-	return (cam);
-}
-
 /* vector = vector_add(vector_add(cam.forward, 
 vector_multiply(cam.right, u * cam.w)), 
 vector_multiply(cam.up, v * cam.h)); */
@@ -49,4 +36,23 @@ t_ray	make_ray_from_pixel(t_camera *cam, int x, int y)
 			);
 	d = unit_vector(d);
 	return (create_ray(origin, d));
+}
+
+void	img_pix_put(t_img *img, int x, int y, t_color color)
+{
+	char	*pixel;
+	int		i;
+	int		c;
+
+	c = rgb_to_int(color);
+	i = img->bpp - 8;
+	pixel = img->addr + (y * img->line + x * (img->bpp / 8));
+	while (i >= 0)
+	{
+		if (img->endian != 0)
+			*pixel++ = (c >> i) & 0xFF;
+		else
+			*pixel++ = (c >> (img->bpp - 8 - i)) & 0xFF;
+		i -= 8;
+	}
 }

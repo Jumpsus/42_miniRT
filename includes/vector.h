@@ -3,7 +3,6 @@
 
 # include <math.h>
 # include <float.h>
-# include "libft.h"
 
 typedef struct s_point {
 	double	x;

@@ -1,4 +1,14 @@
-#include "mini_rt_bonus.h"
+#include "mini_rt.h"
+
+int	rt_render(t_main *data)
+{
+	if (!data->win_ptr)
+		return (1);
+	camera_render(data);
+	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
+		data->img.img_ptr, 0, 0);
+	return (0);
+}
 
 static void	set_camera(t_camera *c)
 {

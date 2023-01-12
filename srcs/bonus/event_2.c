@@ -21,7 +21,6 @@ int	rt_mouse(int key, int x, int y, t_main *data)
 	{
 		rt_scroll(key, data);
 	}
-	rt_render(data);
 	return (0);
 }
 
@@ -61,6 +60,5 @@ int	rt_adjust_object(int key, t_main *data)
 		rotate_object(data->select_obj.obj, 0, adjust * M_PI / 36, 0);
 	else if (data->select_obj.mode == 'z')
 		rotate_object(data->select_obj.obj, 0, 0, adjust * M_PI / 36);
-	rt_render(data);
 	return (0);
 }

@@ -19,10 +19,6 @@
 #  define K_X			120
 #  define K_LESS        44
 #  define K_MORE        46
-#  define M_UP			4
-#  define M_LEFT		1
-#  define M_DOWN		5
-#  define M_RIGHT		3
 
 # else
 
@@ -42,11 +38,12 @@
 #  define K_X			7
 #  define K_LESS        43
 #  define K_MORE        47
+
+# endif
+
 #  define M_UP			4
 #  define M_LEFT		1
 #  define M_DOWN		5
 #  define M_RIGHT		3
-
-# endif
 
 #endif

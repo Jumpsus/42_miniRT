@@ -12,15 +12,13 @@
 
 #include "mini_rt_bonus.h"
 
-static int	check_input(char *s, double start, double end, int is_int)
+static int	check_input(char *s, double start, double end)
 {
 	double	n;
 	int		dot;
 	int		len;
 
 	dot = 0;
-	if (is_int)
-		dot = 1;
 	len = -1;
 	if (*s == '+' || *s == '-')
 		len++;
@@ -41,7 +39,7 @@ int	scene_assign_ratio(t_object *obj, char *s)
 
 	err = "Error\nRatio must be of the format \
 \"n\" where n is a double in the range [0,1]";
-	if (check_input(s, 0, 1, 0))
+	if (check_input(s, 0, 1))
 	{
 		obj->ratio = ft_atof(s);
 		return (1);
@@ -56,7 +54,7 @@ int	scene_assign_view(t_object *obj, char *s)
 
 	err = "Error\nField of view must be of the format \
 \"n\" where n is a double in the range [0,180]";
-	if (check_input(s, 0, 180, 0))
+	if (check_input(s, 0, 180))
 	{
 		obj->fov = ft_atof(s);
 		return (1);
@@ -77,7 +75,7 @@ int	scene_assign_diam_height(t_object *obj, char *s, char type)
 	else if (type == 'd')
 		err = "Error\nDiameter must be of the format \
 \"n\" where n is a double";
-	if (check_input(s, -DBL_MAX, DBL_MAX, 0))
+	if (check_input(s, -DBL_MAX, DBL_MAX))
 	{
 		if (type == 'h')
 			obj->height = ft_atof(s);

@@ -34,7 +34,6 @@ int	rt_adjust_trans(int key, t_main *data)
 		data->select_obj.obj->pos = vector_add(data->select_obj.obj->pos, dir);
 	else
 		data->use_camera.eye = vector_add(data->use_camera.eye, dir);
-	rt_render(data);
 	return (0);
 }
 
@@ -48,7 +47,6 @@ int	rt_adjust_rots(int key, t_main *data)
 		data->use_camera.yaw = data->use_camera.yaw + (M_PI / 36.0);
 	else if (key == K_D)
 		data->use_camera.yaw = data->use_camera.yaw - (M_PI / 36.0);
-	rt_render(data);
 	return (0);
 }
 

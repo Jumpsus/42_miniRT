@@ -55,29 +55,6 @@ static t_hit	hit_cylinder_surface_2(t_object *cy, t_ray r, t_hit hit[2])
 	return (set_hit_property(-DBL_MAX, cy, r));
 }
 
-// static t_hit	hit_cylinder_surface(t_object *cy, t_ray r)
-// {
-// 	t_hit	hit[2];
-// 	t_point	x;
-// 	double	a;
-// 	double	b;
-// 	double	c;
-
-// 	x = vector_subtract(r.orig,
-// 		ray_at(create_ray(cy->pos, cy->norm), -cy->height / 2));
-// 	a = vector_square_length(vector_subtract(r.dir,
-// 		vector_multiply(cy->norm, vector_dot(r.dir, cy->norm))));
-// 	b = 2 * vector_dot(vector_subtract(r.dir,
-// 		vector_multiply(cy->norm, vector_dot(r.dir, cy->norm))),
-// 		vector_subtract(x, vector_multiply(cy->norm, vector_dot(x, cy->norm))));
-// 	c = vector_square_length(vector_subtract(x,
-// 		vector_multiply(cy->norm, vector_dot(x, cy->norm))))
-// 		- pow(cy->radius, 2);
-// 	hit[0] = set_hit_property(solve_quadratic_minus(a, b, c), cy, r);
-// 	hit[1] = set_hit_property(solve_quadratic_plus(a, b, c), cy, r);
-// 	return (hit_cylinder_surface_2(cy, r, hit));
-// }
-
 // https://hugi.scene.org/online/hugi24/coding%20graphics%20chris%20dragan%20raytracing%20shapes.htm
 static t_hit	hit_cylinder_surface(t_object *cy, t_ray r)
 {

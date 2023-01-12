@@ -3,9 +3,9 @@ NAME = miniRT
 SRC_DIR = srcs/
 OBJ_DIR = objs/
 
-SRC_FILE = scene_read scene_assign scene_set scene_utils \
+SRC_FILE = scene_read scene_assign_1 scene_assign_2 scene_set_1 scene_set_2 scene_utils \
 	hit hit_sphere hit_plane hit_cylinder hit_utils \
-	camera_1 camera_2 trace color_utils event_1 event_2 \
+	camera_1 camera_2 trace color_utils_1 color_utils_2 event_1 event_2 \
 	render_utils matrix_utils vect_utils_1 vect_utils_2 vect_utils_3 \
 	main
 

@@ -40,7 +40,7 @@ int	scene_assign_position(t_object *obj, char *s)
 	char	*err;
 
 	err = "Error\nx,y,z coordinates must be of \
-the format \"n,n,n\" where n is a double\n";
+the format \"n,n,n\" where n is a double";
 	pos = ft_split(s, ',');
 	if (size_2d(pos) == 3)
 	{
@@ -54,7 +54,7 @@ the format \"n,n,n\" where n is a double\n";
 		}
 	}
 	free_2d(pos);
-	ft_putstr_fd(err, STDERR_FILENO);
+	ft_putendl_fd(err, STDERR_FILENO);
 	return (0);
 }
 
@@ -64,7 +64,7 @@ int	scene_assign_color(t_object *obj, char *s)
 	char	*err;
 
 	err = "Error\nRGB colors must be of the format \
-\"n,n,n\" where n is an integer in the range [0,255]\n";
+\"n,n,n\" where n is an integer in the range [0,255]";
 	color = ft_split(s, ',');
 	if (size_2d(color) == 3)
 	{
@@ -79,7 +79,7 @@ int	scene_assign_color(t_object *obj, char *s)
 		}
 	}
 	free_2d(color);
-	ft_putstr_fd(err, STDERR_FILENO);
+	ft_putendl_fd(err, STDERR_FILENO);
 	return (0);
 }
 
@@ -90,7 +90,7 @@ int	scene_assign_normalized(t_object *obj, char *s)
 
 	err = "Error\n3d normalized orientation vector \
 must be of the format \"n,n,n\" where n is \
-a double in the range [-1,1]\n";
+a double in the range [-1,1]";
 	norm = ft_split(s, ',');
 	if (size_2d(norm) == 3)
 	{
@@ -105,60 +105,6 @@ a double in the range [-1,1]\n";
 		}
 	}
 	free_2d(norm);
-	ft_putstr_fd(err, STDERR_FILENO);
-	return (0);
-}
-
-int	scene_assign_ratio(t_object *obj, char *s)
-{
-	char	*err;
-
-	err = "Error\nratio must be of the format \
-\"n\" where n is a double in the range [0,1]\n";
-	if (check_input(s, 0, 1, 0))
-	{
-		obj->ratio = ft_atof(s);
-		return (1);
-	}
-	ft_putstr_fd(err, STDERR_FILENO);
-	return (0);
-}
-
-int	scene_assign_view(t_object *obj, char *s)
-{
-	char	*err;
-
-	err = "Error\nfield of view must be of the format \
-\"n\" where n is a double in the range [0,180]\n";
-	if (check_input(s, 0, 180, 0))
-	{
-		obj->fov = ft_atof(s);
-		return (1);
-	}
-	ft_putstr_fd(err, STDERR_FILENO);
-	return (0);
-}
-
-int	scene_assign_diam_height(t_object *obj, char *s, char type)
-{
-	char	*err;
-
-	if (!(type == 'h' || type == 'd'))
-		return (0);
-	else if (type == 'h')
-		err = "Error\nheight must be of the format \
-\"n\" where n is a double\n";
-	else if (type == 'd')
-		err = "Error\ndiameter must be of the format \
-\"n\" where n is a double\n";
-	if (check_input(s, -DBL_MAX, DBL_MAX, 0))
-	{
-		if (type == 'h')
-			obj->height = ft_atof(s);
-		else if (type == 'd')
-			obj->radius = ft_atof(s) * 0.5;
-		return (1);
-	}
-	ft_putstr_fd(err, STDERR_FILENO);
+	ft_putendl_fd(err, STDERR_FILENO);
 	return (0);
 }

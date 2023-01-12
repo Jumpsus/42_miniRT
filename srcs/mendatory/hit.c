@@ -24,12 +24,6 @@ t_hit	hit_object(t_main *data, t_ray ray)
 	cur = data->obj;
 	while (cur)
 	{
-		// if (cur->id == SPHERE)
-		// 	hit = hit_sphere(cur, ray);
-		// else if (cur->id == PLANE)
-		// 	hit = hit_plane(cur, ray);
-		// else if (cur->id == CYLINDER)
-		// 	hit = hit_cylinder(cur, ray);
 		hit = get_hit(cur, ray);
 		if (hit.is_hit)
 		{

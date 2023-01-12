@@ -5,10 +5,10 @@ void	camera_render(t_main *data);
 
 void	rt_init(t_main *data, char *path)
 {
+	data->light = 0;
 	data->obj = 0;
 	scene_set_defalt(&data->ambient);
 	scene_set_defalt(&data->camera);
-	scene_set_defalt(&data->light);
 	scene_read(data, path);
 	data->mlx_ptr = mlx_init();
 	data->win_ptr = mlx_new_window(data->mlx_ptr,

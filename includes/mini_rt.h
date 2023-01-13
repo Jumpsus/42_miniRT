@@ -96,11 +96,12 @@ void		scene_clear(t_main *data);
 /* render */
 int			rt_render(t_main *data);
 void		camera_render(t_main *data);
-t_color		trace(t_main *data, t_ray r);
+void		tutorial_render(t_main *data);
 
 /* render_utils */
 t_ray		make_ray_from_pixel(t_camera *cam, int x, int y);
 void		img_pix_put(t_img *img, int x, int y, t_color color);
+t_color		trace(t_main *data, t_ray r);
 
 /* event */
 int			rt_key(int key, t_main *data);

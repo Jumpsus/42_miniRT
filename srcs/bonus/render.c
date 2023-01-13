@@ -7,6 +7,7 @@ int	rt_render(t_main *data)
 	camera_render(data);
 	mlx_put_image_to_window(data->mlx_ptr, data->win_ptr,
 		data->img.img_ptr, 0, 0);
+	tutorial_render(data);
 	return (0);
 }
 
@@ -56,4 +57,24 @@ void	camera_render(t_main *data)
 		}
 		j++;
 	}
+}
+
+void	tutorial_render(t_main *data)
+{
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 15, 0xFFFFFF,
+		"how to use");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 30, 0xFFFFFF,
+		"object grab    : right click");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 45, 0xFFFFFF,
+		"object drop    : left click");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 60, 0xFFFFFF,
+		"object resize  : H,R + <,>");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 75, 0xFFFFFF,
+		"object rotation: X,Y,Z + <,>");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 90, 0xFFFFFF,
+		"camera rotation: W,A,S,D");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 105, 0xFFFFFF,
+		"zoom           : scroll");
+	mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 120, 0xFFFFFF,
+		"translation    : up,left,down,right");
 }

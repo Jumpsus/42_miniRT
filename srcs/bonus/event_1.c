@@ -39,9 +39,9 @@ int	rt_adjust_trans(int key, t_main *data)
 
 int	rt_adjust_rots(int key, t_main *data)
 {
-	if (key == K_W)
+	if (key == K_S)
 		data->use_camera.pitch = data->use_camera.pitch - (M_PI / 36.0);
-	else if (key == K_S)
+	else if (key == K_W)
 		data->use_camera.pitch = data->use_camera.pitch + (M_PI / 36.0);
 	else if (key == K_A)
 		data->use_camera.yaw = data->use_camera.yaw + (M_PI / 36.0);
@@ -52,14 +52,14 @@ int	rt_adjust_rots(int key, t_main *data)
 
 static int	rt_adjust_zoom(int key, t_main *data)
 {
-	if (key == M_UP)
+	if (key == M_DOWN)
 	{
 		if (data->use_camera.fov + 5.0 > 180.0)
 			data->use_camera.fov = 180;
 		else
 			data->use_camera.fov += 5.0;
 	}
-	else if (key == M_DOWN)
+	else if (key == M_UP)
 	{
 		if (data->use_camera.fov - 5.0 < 0.0)
 			data->use_camera.fov = 0;

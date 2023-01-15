@@ -92,4 +92,3 @@ void	rotate_object(t_object *obj, double x_rot, double y_rot, double z_rot)
 		+ obj->norm.z * (cos(x_rot) * cos(y_rot));
 	obj->norm = unit_vector(result);
 }
-

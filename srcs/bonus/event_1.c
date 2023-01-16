@@ -39,9 +39,9 @@ int	rt_adjust_trans(int key, t_main *data)
 
 int	rt_adjust_rots(int key, t_main *data)
 {
-	if (key == K_S)
+	if (key == K_W)
 		data->use_camera.pitch = data->use_camera.pitch - (M_PI / 36.0);
-	else if (key == K_W)
+	else if (key == K_S)
 		data->use_camera.pitch = data->use_camera.pitch + (M_PI / 36.0);
 	else if (key == K_A)
 		data->use_camera.yaw = data->use_camera.yaw + (M_PI / 36.0);

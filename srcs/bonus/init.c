@@ -64,7 +64,7 @@ t_camera	init_camera(t_object camera)
 	cam.aspect_ratio = WINDOW_WIDTH / WINDOW_HEIGHT;
 	cam.fov = camera.fov;
 	cam.roll = 0.0;
-	cam.pitch = asin(-1.0 * camera.norm.y);
+	cam.pitch = asin(1.0 * camera.norm.y);
 	cam.yaw = atan2(camera.norm.x, camera.norm.z);
 	return (cam);
 }

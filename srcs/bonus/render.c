@@ -29,7 +29,7 @@ static void	set_camera(t_camera *c)
 	z = cos(c->pitch) * sin(c->yaw) * sin(c->roll) - \
 		sin(c->pitch) * cos(c->roll);
 	c->up = create_vector(x, y, z);
-	x = 1.0 * sin(c->yaw);
+	x = -1.0 * sin(c->yaw);
 	y = sin(c->pitch) * cos(c->yaw);
 	z = cos(c->pitch) * cos(c->yaw);
 	c->forward = create_vector(x, y, z);

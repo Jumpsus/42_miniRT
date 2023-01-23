@@ -49,4 +49,11 @@ void	scene_clear(t_main *data)
 		free(cur);
 		cur = next;
 	}
+	cur = data->light;
+	while (cur)
+	{
+		next = cur->next;
+		free(cur);
+		cur = next;
+	}
 }

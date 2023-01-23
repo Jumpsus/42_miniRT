@@ -5,8 +5,8 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: pratanac <marvin@42.fr>                    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/12 17:48:13 by pratanac          #+#    #+#             */
-/*   Updated: 2023/01/12 17:48:15 by pratanac         ###   ########.fr       */
+/*   Created: 2023/01/12 21:16:55 by pratanac          #+#    #+#             */
+/*   Updated: 2023/01/18 18:57:58 by pratanac         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,9 +76,9 @@ void	tutorial_render(t_main *data)
 	mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 15, 0xFFFFFF,
 		"how to use");
 	mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 30, 0xFFFFFF,
-		"object grab    : right click");
+		"object grab    : left click");
 	mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 45, 0xFFFFFF,
-		"object drop    : left click");
+		"object drop    : right click");
 	mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 60, 0xFFFFFF,
 		"object resize  : H,R + <,>");
 	mlx_string_put(data->mlx_ptr, data->win_ptr, 10, 75, 0xFFFFFF,
